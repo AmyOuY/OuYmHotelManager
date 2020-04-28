@@ -1,1 +1,1 @@
-# OuYmHotelManager
+# Hotel Management System
