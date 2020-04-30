@@ -6,7 +6,23 @@
         xmlns:local="clr-namespace:OHMDesktopUI.Views"
         mc:Ignorable="d"
         Title="ShellView" Height="450" Width="800">
-    <Grid>
-        
-    </Grid>
+    <DockPanel>
+        <Menu DockPanel.Dock="Top" FontSize="18">
+            <MenuItem Header="_File"></MenuItem>
+            <MenuItem Header="_Account">
+                <MenuItem x:Name="Login" Header="_Login" />
+            </MenuItem>
+            <MenuItem x:Name ="Reservation" Header="_Reservation"></MenuItem>
+            <MenuItem x:Name ="Client" Header="_Client"></MenuItem>
+            <MenuItem x:Name ="Room" Header="_Room"></MenuItem>
+            <MenuItem x:Name ="CheckIn" Header="Check_In"></MenuItem>
+            <MenuItem x:Name ="CheckOut" Header="Check_Out"></MenuItem>
+        </Menu>
+
+        <Grid>
+            <ContentControl x:Name="ActiveItem" Margin="20 5 20 20" />
+        </Grid>
+    </DockPanel>
+    
+    
 </Window>
