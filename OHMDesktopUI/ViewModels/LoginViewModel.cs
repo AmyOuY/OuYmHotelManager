@@ -1,4 +1,5 @@
 ﻿using Caliburn.Micro;
+using OHMDesktopUI.Library.Api;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,6 +10,14 @@ namespace OHMDesktopUI.ViewModels
 {
     public class LoginViewModel : Screen
     {
+        private readonly IAPIHelper _apiHelper;
+
+        public LoginViewModel(IAPIHelper apiHelper)
+        {
+            _apiHelper = apiHelper;
+        }
+
+
         private string _userName;
 
         public string UserName
@@ -24,7 +33,7 @@ namespace OHMDesktopUI.ViewModels
 
 
         private string _password;
-
+        
         public string Password
         {
             get { return _password; }
@@ -36,6 +45,36 @@ namespace OHMDesktopUI.ViewModels
             }
         }
 
+
+
+        private string _errorMessage;
+
+        public string ErrorMessage
+        {
+            get { return _errorMessage; }
+            set
+            {
+                _errorMessage = value;
+                NotifyOfPropertyChange(() => ErrorMessage);
+                NotifyOfPropertyChange(() => IsErrorVisible);
+            }
+        }
+
+
+        public bool IsErrorVisible
+        {
+            get
+            {
+                bool output = false;
+
+                if (ErrorMessage?.Length > 0)
+                {
+                    output = true;
+                }
+
+                return output;
+            }
+        }
 
 
         public bool CanLogin
@@ -54,10 +93,23 @@ namespace OHMDesktopUI.ViewModels
         }
 
 
-        public void Login()
+        public async Task Login()
         {
-            Console.WriteLine();
+            try
+            {
+                ErrorMessage = "";
+                var result = await _apiHelper.Authenticate(UserName, Password);
+            }
+            catch (Exception ex)
+            {
+
+                ErrorMessage = ex.Message;
+            }
         }
+
+
+
+        
 
     }
 }

@@ -120,5 +120,11 @@
   <ItemGroup>
     <Folder Include="Models\" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\OHMDesktopUI.Library\OHMDesktopUI.Library.csproj">
+      <Project>{70607A82-5B03-4A20-82D0-7695DE90EBB0}</Project>
+      <Name>OHMDesktopUI.Library</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
