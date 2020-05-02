@@ -1,6 +1,7 @@
 ﻿using Caliburn.Micro;
 using OHMDesktopUI.Helpers;
 using OHMDesktopUI.Library.Api;
+using OHMDesktopUI.Library.Models;
 using OHMDesktopUI.ViewModels;
 using System;
 using System.Collections.Generic;
@@ -34,7 +35,8 @@ namespace OHMDesktopUI
             _container
                 .Singleton<IWindowManager, WindowManager>()
                 .Singleton<IEventAggregator, EventAggregator>()
-                .Singleton<IAPIHelper, APIHelper>();
+                .Singleton<IAPIHelper, APIHelper>()
+                .Singleton<ILoggedInUser, LoggedInUser>();
 
             GetType().Assembly.GetTypes()
                 .Where(type => type.IsClass)
