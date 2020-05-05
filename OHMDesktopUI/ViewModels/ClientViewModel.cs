@@ -7,6 +7,7 @@ using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Controls;
 
 namespace OHMDesktopUI.ViewModels
 {
@@ -26,7 +27,7 @@ namespace OHMDesktopUI.ViewModels
 
             await LoadClients();
         }
-      
+
 
 
         private async Task LoadClients()
@@ -135,7 +136,7 @@ namespace OHMDesktopUI.ViewModels
         }
 
 
-        private string _address;        
+        private string _address;
 
         public string Address
         {
@@ -177,7 +178,7 @@ namespace OHMDesktopUI.ViewModels
             };
 
             await _clientEndpoint.PostClient(client);
-     
+
             client.Id = await _clientEndpoint.GetClientID(client);
             Clients.Add(client);
             NotifyOfPropertyChange(() => Clients);
@@ -250,6 +251,38 @@ namespace OHMDesktopUI.ViewModels
         {
             await _clientEndpoint.DeleteClient(SelectedClient.Id);
             Clients.Remove(SelectedClient);
+            NotifyOfPropertyChange(() => Clients);
+        }
+
+
+       
+        public string SearchBox { get; set; }
+
+        List<ClientModel> filterList = new List<ClientModel>();
+
+        private void SearchBox_TextChanged(object sender, TextChangedEventArgs args)
+        {
+            //SearchBox = (sender as TextBox).Text;
+
+            filterList.Clear();
+
+            if (SearchBox == "")
+            {
+                filterList.AddRange(Clients);
+            }
+            else
+            {
+                foreach (ClientModel client in Clients)
+                {
+
+                    if (client.FirstName.Contains(SearchBox))
+                    {
+                        filterList.Add(client);
+                    }
+                }
+            }
+
+            Clients = new BindingList<ClientModel>(filterList);
             NotifyOfPropertyChange(() => Clients);
         }
 

@@ -24,5 +24,7 @@ namespace OHMDesktopUI.Views
         {
             InitializeComponent();
         }
+
+        
     }
 }

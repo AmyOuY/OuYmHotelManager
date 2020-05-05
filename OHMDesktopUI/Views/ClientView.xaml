@@ -27,7 +27,7 @@
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
 
-        <TextBlock Text="Client" Grid.Row="0" Grid.Column="1" Margin="0 0 0 20" HorizontalAlignment="Center" FontSize="36" FontWeight="Bold"/>
+        <TextBlock Text="Client" Grid.Row="0" Grid.Column="0" Margin="0 0 0 20" HorizontalAlignment="Center" FontSize="36" FontWeight="Bold"/>
         <StackPanel Orientation="Vertical" Grid.Row="1" Grid.Column="0">
             <!--<StackPanel Orientation="Horizontal">
                 <TextBlock Text="ID:" Margin="20 0 10 15"/>
@@ -59,24 +59,22 @@
                 <TextBox x:Name="Address" TextWrapping="Wrap" Width="400" MinHeight="80"/>
             </StackPanel>
 
-            <StackPanel Orientation="Horizontal">
-                <Button x:Name="AddClient" Content="Add" Margin="20 10 20 15" Padding="10 5" />
-                <Button x:Name="EditClient" Content="Edit" Margin="0 10 20 15" Padding="10 5" />
-                <Button x:Name="RemoveClient" Content="Remove" Margin="0 10 0 15" Padding="10 5" />
-            </StackPanel>
+            <Button x:Name="AddClient" Content="Add New Client" Width="200" Margin="0 10 20 15" Padding="10 5" />
         </StackPanel>
 
+        <StackPanel Orientation="Horizontal" Grid.Row="0" Grid.Column="1">
+            <Button x:Name="EditClient" Content="Edit" Margin="50 20 20 10" Padding="10 5" />
+            <Button x:Name="RemoveClient" Content="Remove" Margin="20 20 0 10" Padding="10 5" />
+        </StackPanel>
 
-        <DataGrid x:Name="Clients" Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="4" MinWidth="400" MinHeight="350">
-            
+        <DataGrid x:Name="Clients" Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="4" MinWidth="450" MinHeight="350">
         </DataGrid>
-        <!--<ListBox x:Name="Clients" Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="4" MinWidth="400" MinHeight="350">
-            <ListBox.ItemTemplate>
-                <DataTemplate>
-                    <TextBlock Text="{Binding DisplayText}" />
-                </DataTemplate>
-            </ListBox.ItemTemplate>
-        </ListBox>-->
+
+
+        <!--<StackPanel Orientation="Horizontal" Grid.Row="0" Grid.Column="2">
+            <TextBlock Text="Search:" Margin="0 15 10 0" />
+            <TextBox x:Name="SearchBox" Text="" Width="100" Height="35" TextChanged="SearchBox_TextChanged" />
+        </StackPanel>-->
 
     </Grid>
 </UserControl>
