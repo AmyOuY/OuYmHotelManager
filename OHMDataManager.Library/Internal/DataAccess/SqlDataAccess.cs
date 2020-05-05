@@ -40,5 +40,16 @@ namespace OHMDataManager.Library.Internal.DataAccess
                 connection.Execute(storedProcedure, parameters, commandType: CommandType.StoredProcedure);
             }
         }
+
+
+        public void DeleteData<T>(string storedProcedure, T parameters, string connectionStringName)
+        {
+            string connectionString = GetConnectionString(connectionStringName);
+
+            using (IDbConnection connection = new SqlConnection(connectionString))
+            {
+                connection.Execute(storedProcedure, parameters, commandType: CommandType.StoredProcedure);
+            }
+        }
     }
 }

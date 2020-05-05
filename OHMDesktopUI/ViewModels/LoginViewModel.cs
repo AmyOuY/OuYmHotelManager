@@ -1,4 +1,5 @@
 ﻿using Caliburn.Micro;
+using OHMDesktopUI.EventModels;
 using OHMDesktopUI.Library.Api;
 using System;
 using System.Collections.Generic;
@@ -11,14 +12,16 @@ namespace OHMDesktopUI.ViewModels
     public class LoginViewModel : Screen
     {
         private readonly IAPIHelper _apiHelper;
+        private readonly IEventAggregator _events;
 
-        public LoginViewModel(IAPIHelper apiHelper)
+        public LoginViewModel(IAPIHelper apiHelper, IEventAggregator events)
         {
             _apiHelper = apiHelper;
+            _events = events;
         }
 
 
-        private string _userName;
+        private string _userName = "yimiao@iamyimiao.com";
 
         public string UserName
         {
@@ -32,7 +35,7 @@ namespace OHMDesktopUI.ViewModels
         }
 
 
-        private string _password;
+        private string _password = "Pwd12345.";
         
         public string Password
         {
@@ -100,6 +103,8 @@ namespace OHMDesktopUI.ViewModels
                 ErrorMessage = "";
                 var result = await _apiHelper.Authenticate(UserName, Password);
                 await _apiHelper.GetLoggedInUserInfo(result.Access_Token);
+
+                _events.PublishOnUIThread(new LogOnEvent());
             }
             catch (Exception ex)
             {

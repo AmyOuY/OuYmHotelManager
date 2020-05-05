@@ -49,8 +49,11 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Api\APIHelper.cs" />
+    <Compile Include="Api\ClientEndpoint.cs" />
     <Compile Include="Api\IAPIHelper.cs" />
+    <Compile Include="Api\IClientEndpoint.cs" />
     <Compile Include="Models\AuthenticatedUser.cs" />
+    <Compile Include="Models\ClientModel.cs" />
     <Compile Include="Models\ILoggedInUser.cs" />
     <Compile Include="Models\LoggedInUser.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
