@@ -1,5 +1,5 @@
 ﻿CREATE PROCEDURE [dbo].[spClient_Insert]
-	@Id int output,
+	@Id int = 0 output,
 	@FirstName nvarchar(50),
 	@LastName nvarchar(50),
 	@Email nvarchar(256),

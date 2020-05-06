@@ -31,7 +31,8 @@ namespace OHMDesktopUI
         protected override void Configure()
         {
             _container.Instance(_container)
-                .PerRequest<IClientEndpoint, ClientEndpoint>();
+                .PerRequest<IClientEndpoint, ClientEndpoint>()
+                .PerRequest<IRoomEndpoint, RoomEndpoint>();
 
             _container
                 .Singleton<IWindowManager, WindowManager>()

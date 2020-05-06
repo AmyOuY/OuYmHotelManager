@@ -254,37 +254,6 @@ namespace OHMDesktopUI.ViewModels
             NotifyOfPropertyChange(() => Clients);
         }
 
-
-       
-        public string SearchBox { get; set; }
-
-        List<ClientModel> filterList = new List<ClientModel>();
-
-        private void SearchBox_TextChanged(object sender, TextChangedEventArgs args)
-        {
-            //SearchBox = (sender as TextBox).Text;
-
-            filterList.Clear();
-
-            if (SearchBox == "")
-            {
-                filterList.AddRange(Clients);
-            }
-            else
-            {
-                foreach (ClientModel client in Clients)
-                {
-
-                    if (client.FirstName.Contains(SearchBox))
-                    {
-                        filterList.Add(client);
-                    }
-                }
-            }
-
-            Clients = new BindingList<ClientModel>(filterList);
-            NotifyOfPropertyChange(() => Clients);
-        }
-
+        
     }
 }

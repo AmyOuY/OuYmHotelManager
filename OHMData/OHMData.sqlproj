@@ -77,6 +77,11 @@
     <Build Include="dbo\Stored Procedures\spClient_Remove.sql" />
     <Build Include="dbo\Stored Procedures\spClient_Update.sql" />
     <Build Include="dbo\Stored Procedures\spClientIDLookUp.sql" />
+    <Build Include="dbo\Stored Procedures\spRoom_GetAll.sql" />
+    <Build Include="dbo\Stored Procedures\spRoom_Insert.sql" />
+    <Build Include="dbo\Stored Procedures\spRoom_Remove.sql" />
+    <Build Include="dbo\Stored Procedures\spRoom_Update.sql" />
+    <Build Include="dbo\Stored Procedures\spRoomIDLookUp.sql" />
   </ItemGroup>
   <ItemGroup>
     <RefactorLog Include="OHMData.refactorlog" />
