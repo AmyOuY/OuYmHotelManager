@@ -204,13 +204,27 @@ namespace OHMDesktopUI.ViewModels
 
 
 
+        private bool IsRoomNumberExisting()
+        {
+            foreach (RoomModel room in Rooms)
+            {
+                if (room.RoomNumber == RoomNumber)
+                {
+                    return true;
+                }
+            }
+
+            return false;
+        }
+
+
         public bool CanAddRoom
         {
             get
             {
                 bool output = false;
 
-                if (RoomNumber > 0 && SelectedRoomType?.Length > 0 && SelectedRoomCapacity > 0 && RoomPrice > 0 && Description?.Length > 0 && SelectedIsAvailable)
+                if (RoomNumber > 0 && !IsRoomNumberExisting() && SelectedRoomType?.Length > 0 && SelectedRoomCapacity > 0 && RoomPrice > 0 && Description?.Length > 0)
                 {
                     output = true;
                 }

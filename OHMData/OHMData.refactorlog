@@ -7,4 +7,11 @@
     <Property Name="ParentElementType" Value="SqlTable" />
     <Property Name="NewName" Value="RoomNumber" />
   </Operation>
+  <Operation Name="Rename Refactor" Key="3ab2714e-b80e-4558-b406-0f7c918923e1" ChangeDateTime="05/06/2020 21:55:27">
+    <Property Name="ElementName" Value="[dbo].[Reservation].[RoomId]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[Reservation]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="RoomType" />
+  </Operation>
 </Operations>

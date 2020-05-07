@@ -82,6 +82,12 @@
     <Build Include="dbo\Stored Procedures\spRoom_Remove.sql" />
     <Build Include="dbo\Stored Procedures\spRoom_Update.sql" />
     <Build Include="dbo\Stored Procedures\spRoomIDLookUp.sql" />
+    <Build Include="dbo\Stored Procedures\spReservation_GetAll.sql" />
+    <Build Include="dbo\Stored Procedures\spReservation_Insert.sql" />
+    <Build Include="dbo\Stored Procedures\spReservation_Remove.sql" />
+    <Build Include="dbo\Stored Procedures\spReservation_Update.sql" />
+    <Build Include="dbo\Stored Procedures\spReservationIDLookUp.sql" />
+    <Build Include="dbo\Stored Procedures\spClientLookUp.sql" />
   </ItemGroup>
   <ItemGroup>
     <RefactorLog Include="OHMData.refactorlog" />
