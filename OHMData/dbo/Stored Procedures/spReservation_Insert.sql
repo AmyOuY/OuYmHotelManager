@@ -1,7 +1,7 @@
 ﻿CREATE PROCEDURE [dbo].[spReservation_Insert]
 	@Id int = 0 output,
 	@ClientId int,
-	@RoomType nchar(10),
+	@RoomType nvarchar(10),
 	@RoomNumber int,
 	@DateIn datetime2,
 	@DateOut datetime2,

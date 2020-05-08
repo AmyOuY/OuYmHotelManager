@@ -1,7 +1,7 @@
 ﻿CREATE PROCEDURE [dbo].[spRoom_Update]
 	@Id int,
 	@RoomNumber int,
-	@RoomType nchar(10),
+	@RoomType nvarchar(10),
 	@RoomCapacity int,
 	@RoomPrice money,
 	@Description nvarchar(MAX),

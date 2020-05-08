@@ -2,7 +2,7 @@
 (
 	[Id] INT NOT NULL PRIMARY KEY IDENTITY, 
     [RoomNumber] INT NOT NULL, 
-    [RoomType] NCHAR(10) NOT NULL, 
+    [RoomType] NVARCHAR(10) NOT NULL, 
     [RoomCapacity] INT NOT NULL, 
     [RoomPrice] MONEY NOT NULL, 
     [Description] NVARCHAR(MAX) NOT NULL, 

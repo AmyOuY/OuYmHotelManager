@@ -7,42 +7,35 @@ using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Controls;
 
 namespace OHMDesktopUI.ViewModels
 {
     public class ReservationViewModel : Screen
     {
         private readonly IReservationEndpoint _reservationEndpoint;
+        private readonly IRoomEndpoint _roomEndpoint;
 
-        public ReservationViewModel(IReservationEndpoint reservationEndpoint)
+        public ReservationViewModel(IReservationEndpoint reservationEndpoint, IRoomEndpoint roomEndpoint)
         {
             _reservationEndpoint = reservationEndpoint;
+            _roomEndpoint = roomEndpoint;
         }
 
 
-        private int _id;
 
-        public int Id
+        protected override async void OnViewLoaded(object view)
         {
-            get { return _id; }
-            set
-            {
-                _id = value;
-                NotifyOfPropertyChange(() => Id);
-            }
+            base.OnViewLoaded(view);
+            await LoadReservations();
         }
 
 
-        private int _clientId;
 
-        public int ClientId
+        private async Task LoadReservations()
         {
-            get { return _clientId; }
-            set
-            {
-                _clientId = value;
-                NotifyOfPropertyChange(() => ClientId);
-            }
+            var reservationList = await _reservationEndpoint.GetAllReservations();
+            Reservations = new BindingList<ReservationModel>(reservationList);
         }
 
 
@@ -69,12 +62,41 @@ namespace OHMDesktopUI.ViewModels
             {
                 _selectedReservation = value;
                 NotifyOfPropertyChange(() => SelectedReservation);
+                NotifyOfPropertyChange(() => CanEditReservation);
+                NotifyOfPropertyChange(() => CanRemoveReservation);
             }
         }
 
 
 
-        private BindingList<string> _roomTypes = new BindingList<string> { "single", "double", "triple", "quad"};
+        private int _id;
+
+        public int Id
+        {
+            get { return _id; }
+            set
+            {
+                _id = value;
+                NotifyOfPropertyChange(() => Id);
+            }
+        }
+
+
+        private int _clientId;
+
+        public int ClientId
+        {
+            get { return _clientId; }
+            set
+            {
+                _clientId = value;
+                NotifyOfPropertyChange(() => ClientId);
+                NotifyOfPropertyChange(() => CanAddReservation);
+            }
+        }
+
+
+        private BindingList<string> _roomTypes = new BindingList<string> { "single", "double", "triple", "quad" };
 
         public BindingList<string> RoomTypes
         {
@@ -96,20 +118,38 @@ namespace OHMDesktopUI.ViewModels
             {
                 _selectedRoomType = value;
                 NotifyOfPropertyChange(() => SelectedRoomType);
+                NotifyOfPropertyChange(() => CanAddReservation);
+                RoomNumbers = new BindingList<int>();
+                LoadAvailableRooms();
             }
         }
 
 
-        private List<int> _roomNumbers;
+        private BindingList<int> _roomNumbers = new BindingList<int>();
 
-        public List<int> RoomNumbers
+        public BindingList<int> RoomNumbers
         {
             get { return _roomNumbers; }
             set
             {
                 _roomNumbers = value;
-                NotifyOfPropertyChange(() => RoomNumbers);
+                NotifyOfPropertyChange(() => RoomNumbers);              
             }
+        }
+
+
+
+        private async Task LoadAvailableRooms()
+        {
+            List<RoomModel> allRooms = await _roomEndpoint.GetAllRooms();
+
+            foreach (RoomModel room in allRooms)
+            {
+                if (room.IsAvailable && room.RoomType == SelectedRoomType)
+                {
+                    RoomNumbers.Add(room.RoomNumber);
+                }
+            }            
         }
 
 
@@ -122,11 +162,12 @@ namespace OHMDesktopUI.ViewModels
             {
                 _selectedRoomNumber = value;
                 NotifyOfPropertyChange(() => SelectedRoomNumber);
+                NotifyOfPropertyChange(() => CanAddReservation);
             }
         }
 
 
-        private DateTime _dateIn;
+        private DateTime _dateIn = DateTime.Now;
 
         public DateTime DateIn
         {
@@ -135,11 +176,16 @@ namespace OHMDesktopUI.ViewModels
             {
                 _dateIn = value;
                 NotifyOfPropertyChange(() => DateIn);
+                NotifyOfPropertyChange(() => CanAddReservation);
+
             }
         }
 
 
-        private DateTime _dateOut;
+       
+
+
+        private DateTime _dateOut = DateTime.Now;
 
         public DateTime DateOut
         {
@@ -148,18 +194,19 @@ namespace OHMDesktopUI.ViewModels
             {
                 _dateOut = value;
                 NotifyOfPropertyChange(() => DateOut);
+                NotifyOfPropertyChange(() => CanAddReservation);
             }
         }
 
-
+        
 
         public bool CanAddReservation
         {
             get
             {
                 bool output = false;
-
-                if (ClientId > 0 && SelectedRoomType?.Length > 0 && SelectedRoomNumber > 0 && DateIn > DateTime.Now && DateTime.Compare(DateIn, DateOut) < 0)
+                
+                if (ClientId > 0 && SelectedRoomType?.Length > 0 && SelectedRoomNumber > 0 && DateTime.Compare(DateIn, DateTime.Now) > 0 && DateTime.Compare(DateIn, DateOut) < 0)
                 {
                     output = true;
                 }
@@ -169,11 +216,34 @@ namespace OHMDesktopUI.ViewModels
         }
 
 
-        public void AddReservation()
+        public async Task AddReservation()
         {
+            ReservationModel reservation = new ReservationModel
+            {
+                ClientId = ClientId,
+                RoomType = SelectedRoomType,
+                RoomNumber = SelectedRoomNumber,
+                DateIn = DateIn,
+                DateOut = DateOut
+            };
 
+            await _reservationEndpoint.PostReservation(reservation);
+
+            reservation.Id = await _reservationEndpoint.GetReservationID(reservation);
+
+            Reservations.Add(reservation);
+            NotifyOfPropertyChange(() => Reservations);
+
+            ResetReservation();
         }
 
+
+        private void ResetReservation()
+        {
+            ClientId = 0;
+            DateIn = DateTime.Now;
+            DateOut = DateTime.Now;
+        }
 
 
         public bool CanEditReservation
@@ -192,9 +262,19 @@ namespace OHMDesktopUI.ViewModels
         }
 
 
-        public void EditReservation()
+        public async Task EditReservation()
         {
+            ReservationModel reservation = new ReservationModel
+            {
+                Id = SelectedReservation.Id,
+                ClientId = SelectedReservation.ClientId,
+                RoomType = SelectedReservation.RoomType,
+                RoomNumber = SelectedReservation.RoomNumber,
+                DateIn = SelectedReservation.DateIn,
+                DateOut = SelectedReservation.DateOut
+            };
 
+            await _reservationEndpoint.UpdateReservation(reservation);
         }
 
 
@@ -215,9 +295,11 @@ namespace OHMDesktopUI.ViewModels
         }
 
 
-        public void RemoveReservation()
+        public async Task RemoveReservation()
         {
-
+            await _reservationEndpoint.DeleteReservation(SelectedReservation.Id);
+            Reservations.Remove(SelectedReservation);
+            NotifyOfPropertyChange(() => Reservations);
         }
 
 

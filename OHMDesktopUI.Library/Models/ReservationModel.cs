@@ -16,10 +16,10 @@ namespace OHMDesktopUI.Library.Models
 
         public int RoomNumber { get; set; }
 
-        public DateTime DateIn { get; set; }
+        public DateTime DateIn { get; set; } = DateTime.Now;
 
-        public DateTime DateOut { get; set; }
+        public DateTime DateOut { get; set; } = DateTime.Now;
 
-        public DateTime CreatedDate { get; set; }
+        public DateTime CreatedDate { get; set; } = DateTime.Now;
     }
 }
