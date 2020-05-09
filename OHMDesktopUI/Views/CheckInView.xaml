@@ -1,0 +1,103 @@
+﻿<UserControl x:Class="OHMDesktopUI.Views.CheckInView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:OHMDesktopUI.Views"
+             mc:Ignorable="d" Background="White" FontSize="24"
+             d:DesignHeight="450" d:DesignWidth="800">
+    <Grid>
+
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="auto" />
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+
+        <TextBlock Text="Check In" Grid.Row="0" Grid.Column="1" HorizontalAlignment="Center" FontSize="36" FontWeight="Bold" />
+        <StackPanel Orientation="Vertical" Grid.Row="1" Grid.Column="1">
+
+            <StackPanel Orientation="Horizontal">
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock Text="Client:" Margin="0 20 10 15" />
+                    <TextBox x:Name="Client" Width="200" Margin="0 20 10 15"/>
+                </StackPanel>
+
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock Text="Phone:" Margin="100 20 10 15" />
+                    <TextBox x:Name="Phone" Width="250" Margin="0 20 0 15"/>
+                </StackPanel>
+            </StackPanel>
+
+            <StackPanel Orientation="Horizontal">
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock Text="Room Type:" Margin="0 20 10 15" />
+                    <ComboBox x:Name="RoomTypes" Width="100" Height="40" />
+                </StackPanel>
+
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock Text="Room Number:" Margin="150 20 10 15" />
+                    <ComboBox x:Name="RoomNumbers" Width="100" Height="40" />
+                </StackPanel>
+            </StackPanel>
+
+            <StackPanel Orientation="Horizontal">
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock Text="Room Capacity:" Margin="0 20 10 15" />
+                    <TextBox x:Name="RoomCapacity" Width="90" Margin="0 20 10 15"/>
+                </StackPanel>
+
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock Text="Room Price:" Margin="110 20 10 15" />
+                    <TextBox x:Name="RoomPrice" Width="120" Margin="0 20 0 15"/>
+                </StackPanel>
+            </StackPanel>
+
+
+            <StackPanel Orientation="Horizontal">
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock Text="Date In:" Margin="0 20 10 15" />
+                    <DatePicker SelectedDate="{Binding DateIn, StringFormat=d}"  Width="170" Height="40" />
+                </StackPanel>
+
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock Text="Date Out:" Margin="125 20 10 15" />
+                    <DatePicker SelectedDate="{Binding DateOut, StringFormat=d}" Width="170" Height="40" />
+                </StackPanel>
+            </StackPanel>
+
+
+            <StackPanel Orientation="Horizontal">
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock Text="Days of Stay:" Margin="0 20 10 15" />
+                    <TextBox x:Name="StayDays" Width="70" Margin="0 20 10 15"/>
+                </StackPanel>
+
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock Text="Number of Guests:" Margin="160 20 10 15" />
+                    <TextBox x:Name="GuestNumber" Width="70" Margin="0 20 0 15"/>
+                </StackPanel>
+            </StackPanel>
+
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                <Button x:Name="CheckIn" Content="Check In" Width="120" Margin="0 10 50 15" Padding="10 5" />
+                <Button x:Name="EditCheckIn" Content="Edit" Margin="0 10 50 15" Padding="10 5" />
+                <Button x:Name="ClearCheckIn" Content="Clear" Margin="0 10 20 15" Padding="10 5" />
+            </StackPanel>
+           
+        </StackPanel>
+
+    </Grid>
+</UserControl>

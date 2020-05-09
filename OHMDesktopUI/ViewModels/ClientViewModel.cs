@@ -1,4 +1,5 @@
 ﻿using Caliburn.Micro;
+using OHMDesktopUI.EventModels;
 using OHMDesktopUI.Library.Api;
 using OHMDesktopUI.Library.Models;
 using System;
@@ -14,10 +15,12 @@ namespace OHMDesktopUI.ViewModels
     public class ClientViewModel : Screen
     {
         private readonly IClientEndpoint _clientEndpoint;
+        private readonly IEventAggregator _events;
 
-        public ClientViewModel(IClientEndpoint clientEndpoint)
+        public ClientViewModel(IClientEndpoint clientEndpoint, IEventAggregator events)
         {
             _clientEndpoint = clientEndpoint;
+            _events = events;
         }
 
 
@@ -62,6 +65,7 @@ namespace OHMDesktopUI.ViewModels
                 NotifyOfPropertyChange(() => SelectedClient);
                 NotifyOfPropertyChange(() => CanEditClient);
                 NotifyOfPropertyChange(() => CanRemoveClient);
+                NotifyOfPropertyChange(() => CanSwitchToCkeckIn);
             }
         }
 
@@ -196,6 +200,28 @@ namespace OHMDesktopUI.ViewModels
             Email = "";
             Phone = "";
             Address = "";
+        }
+
+
+        public bool CanSwitchToCkeckIn
+        {
+            get
+            {
+                bool output = false;
+
+                if (SelectedClient != null)
+                {
+                    output = true;
+                }
+
+                return output;
+            }
+        }
+
+
+        public void SwitchToCkeckIn()
+        {
+            _events.PublishOnUIThread(new SwitchToLogInEvent($"{ SelectedClient.FirstName } { SelectedClient.LastName }", SelectedClient.Phone));
         }
 
 

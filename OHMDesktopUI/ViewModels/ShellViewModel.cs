@@ -8,18 +8,21 @@ using System.Threading.Tasks;
 
 namespace OHMDesktopUI.ViewModels
 {
-    public class ShellViewModel : Conductor<object>, IHandle<LogOnEvent>
+    public class ShellViewModel : Conductor<object>, IHandle<LogOnEvent>, IHandle<SwitchToLogInEvent>
     {
         private readonly ClientViewModel _clientVM;
         private readonly RoomViewModel _roomVM;
         private readonly ReservationViewModel _reservationVM;
+        private readonly CheckInViewModel _checkInVM;
         private readonly IEventAggregator _events;
 
-        public ShellViewModel(ClientViewModel clientVM, RoomViewModel roomVM, ReservationViewModel reservationVM, IEventAggregator events)
+        public ShellViewModel(ClientViewModel clientVM, RoomViewModel roomVM, ReservationViewModel reservationVM, 
+            CheckInViewModel checkInVM, IEventAggregator events)
         {
             _clientVM = clientVM;
             _roomVM = roomVM;
             _reservationVM = reservationVM;
+            _checkInVM = checkInVM;
             _events = events;
             _events.Subscribe(this);
             ActivateItem(IoC.Get<LoginViewModel>());
@@ -28,9 +31,17 @@ namespace OHMDesktopUI.ViewModels
 
         public void Handle(LogOnEvent message)
         {
-            //ActivateItem(_clientVM);
+            ActivateItem(_clientVM);
             //ActivateItem(_roomVM);
-            ActivateItem(_reservationVM);
+            //ActivateItem(_reservationVM);
+        }
+
+
+        public void Handle(SwitchToLogInEvent message)
+        {
+            ActivateItem(_checkInVM);
+            _checkInVM.Client = message.Client;
+            _checkInVM.Phone = message.Phone;
         }
     }
 }

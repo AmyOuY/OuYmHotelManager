@@ -45,11 +45,13 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DataAccess\CheckInData.cs" />
     <Compile Include="DataAccess\ClientData.cs" />
     <Compile Include="DataAccess\ReservationData.cs" />
     <Compile Include="DataAccess\RoomData.cs" />
     <Compile Include="DataAccess\UserData.cs" />
     <Compile Include="Internal\DataAccess\SqlDataAccess.cs" />
+    <Compile Include="Models\CheckInModel.cs" />
     <Compile Include="Models\ClientModel.cs" />
     <Compile Include="Models\ReservationModel.cs" />
     <Compile Include="Models\RoomModel.cs" />

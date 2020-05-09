@@ -33,7 +33,8 @@ namespace OHMDesktopUI
             _container.Instance(_container)
                 .PerRequest<IClientEndpoint, ClientEndpoint>()
                 .PerRequest<IRoomEndpoint, RoomEndpoint>()
-                .PerRequest<IReservationEndpoint, ReservationEndpoint>();
+                .PerRequest<IReservationEndpoint, ReservationEndpoint>()
+                .PerRequest<ICheckInEndpoint, CheckInEndpoint>();
 
             _container
                 .Singleton<IWindowManager, WindowManager>()

@@ -39,7 +39,7 @@ namespace OHMDataManager.Controllers
         public void Put(int id, ReservationModel reservation)
         {
             ReservationData data = new ReservationData();
-            data.UpdataReservation(reservation);
+            data.UpdateReservation(reservation);
         }
 
 

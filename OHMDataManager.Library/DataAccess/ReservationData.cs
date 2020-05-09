@@ -38,7 +38,7 @@ namespace OHMDataManager.Library.DataAccess
         }
 
 
-        public void UpdataReservation(ReservationModel reservation)
+        public void UpdateReservation(ReservationModel reservation)
         {
             SqlDataAccess sql = new SqlDataAccess();
 
