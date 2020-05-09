@@ -22,14 +22,14 @@ namespace OHMDesktopUI.Library.Models
 
         public decimal RoomPrice { get; set; }
 
-        public DateTime DateIn { get; set; }
+        public DateTime DateIn { get; set; } = DateTime.Now;
 
-        public DateTime DateOut { get; set; }
+        public DateTime DateOut { get; set; } = DateTime.Now;
 
         public int StayDays { get; set; }
 
         public int GuestNumber { get; set; }
 
-        public DateTime CreatedDate { get; set; }
+        public DateTime CreatedDate { get; set; } = DateTime.Now;
     }
 }

@@ -187,6 +187,7 @@ namespace OHMDesktopUI.ViewModels
             set
             {
                 _dateOut = value;
+                StayDays = (DateOut - DateIn).Days + 1;
                 NotifyOfPropertyChange(() => DateOut);
                 NotifyOfPropertyChange(() => StayDays);
                 NotifyOfPropertyChange(() => CanCheckIn);
@@ -200,10 +201,10 @@ namespace OHMDesktopUI.ViewModels
         {
             get { return _stayDays; }
             set
-            {
-                value = (DateOut - DateIn).Days;
+            {               
                 _stayDays = value;
                 NotifyOfPropertyChange(() => StayDays);
+                NotifyOfPropertyChange(() => CanCheckIn);
             }
         }
 
@@ -257,6 +258,12 @@ namespace OHMDesktopUI.ViewModels
 
             await _checkInEndpoint.PostCheckIn(checkIn);
 
+            List<RoomModel> allRooms = await _roomEndpoint.GetAllRooms();
+
+            RoomModel checkedInRoom = allRooms.Where(x => x.RoomNumber == SelectedRoomNumber).FirstOrDefault();
+            checkedInRoom.IsAvailable = false;
+            await _roomEndpoint.UpdateRoom(checkedInRoom);
+
             ClearCheckIn();
         }
 
@@ -274,45 +281,6 @@ namespace OHMDesktopUI.ViewModels
             DateOut = DateTime.Now;
             StayDays = 0;
             GuestNumber = 0;
-        }
-
-
-        public bool CanEditCheckIn
-        {
-            get
-            {
-                bool output = false;
-
-                if (Client?.Length > 0 && Phone?.Length > 0 && SelectedRoomType?.Length > 0 && SelectedRoomNumber > 0
-                    && RoomCapacity > 0 && RoomPrice > 0 && DateTime.Compare(DateIn, DateOut) < 0 && StayDays > 0 && GuestNumber > 0)
-                {
-                    output = true;
-                }
-
-                return output;
-            }
-        }
-
-
-        public async Task EditCheckIn()
-        {
-            CheckInModel checkIn = new CheckInModel
-            {
-                Client = Client,
-                Phone = Phone,
-                RoomType = SelectedRoomType,
-                RoomNumber = SelectedRoomNumber,
-                RoomCapacity = RoomCapacity,
-                RoomPrice = RoomPrice,
-                DateIn = DateIn,
-                DateOut = DateOut,
-                StayDays = StayDays,
-                GuestNumber = GuestNumber
-            };
-
-            await _checkInEndpoint.PostCheckIn(checkIn);
-
-            ClearCheckIn();
         }
     }
 }
