@@ -14,15 +14,17 @@ namespace OHMDesktopUI.ViewModels
         private readonly RoomViewModel _roomVM;
         private readonly ReservationViewModel _reservationVM;
         private readonly CheckInViewModel _checkInVM;
+        private readonly CheckOutViewModel _checkOutVM;
         private readonly IEventAggregator _events;
 
         public ShellViewModel(ClientViewModel clientVM, RoomViewModel roomVM, ReservationViewModel reservationVM, 
-            CheckInViewModel checkInVM, IEventAggregator events)
+            CheckInViewModel checkInVM, CheckOutViewModel checkOutVM, IEventAggregator events)
         {
             _clientVM = clientVM;
             _roomVM = roomVM;
             _reservationVM = reservationVM;
             _checkInVM = checkInVM;
+            _checkOutVM = checkOutVM;
             _events = events;
             _events.Subscribe(this);
             ActivateItem(IoC.Get<LoginViewModel>());
@@ -31,9 +33,10 @@ namespace OHMDesktopUI.ViewModels
 
         public void Handle(LogOnEvent message)
         {
-            ActivateItem(_clientVM);
+            //ActivateItem(_clientVM);
             //ActivateItem(_roomVM);
             //ActivateItem(_reservationVM);
+            ActivateItem(_checkOutVM);
         }
 
 

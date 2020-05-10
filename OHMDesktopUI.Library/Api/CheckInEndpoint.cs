@@ -30,6 +30,44 @@ namespace OHMDesktopUI.Library.Api
         }
 
 
+
+        public async Task<List<CheckInModel>> GetAllCheckIns()
+        {
+            using (HttpResponseMessage response = await _apiHelper.ApiClient.GetAsync("/api/CheckIn"))
+            {
+                if (response.IsSuccessStatusCode)
+                {
+                    var result = await response.Content.ReadAsAsync<List<CheckInModel>>();
+
+                    return result;
+                }
+                else
+                {
+                    throw new Exception(response.ReasonPhrase);
+                }
+            }
+        }
+
+
+        public async Task<CheckInModel> GetCheckIn(ClientInfo cInfo)
+        {
+            using (HttpResponseMessage response = await _apiHelper.ApiClient.PostAsJsonAsync("api/CheckIn/PostForCheckIn", cInfo))
+            {
+                if (response.IsSuccessStatusCode)
+                {
+                    var result = await response.Content.ReadAsAsync<CheckInModel>();
+
+                    return result;
+                }
+                else
+                {
+                    throw new Exception(response.ReasonPhrase);
+                }
+            }
+        }
+
+
+
         public async Task<int> GetCheckInID(CheckInModel checkIn)
         {
             using (HttpResponseMessage response = await _apiHelper.ApiClient.PostAsJsonAsync("/api/CheckIn/PostForID", checkIn))

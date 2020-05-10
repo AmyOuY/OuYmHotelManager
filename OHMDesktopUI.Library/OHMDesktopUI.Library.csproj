@@ -50,9 +50,11 @@
   <ItemGroup>
     <Compile Include="Api\APIHelper.cs" />
     <Compile Include="Api\CheckInEndpoint.cs" />
+    <Compile Include="Api\CheckOutEndpoint.cs" />
     <Compile Include="Api\ClientEndpoint.cs" />
     <Compile Include="Api\IAPIHelper.cs" />
     <Compile Include="Api\ICheckInEndpoint.cs" />
+    <Compile Include="Api\ICheckOutEndpoint.cs" />
     <Compile Include="Api\IClientEndpoint.cs" />
     <Compile Include="Api\IReservationEndpoint.cs" />
     <Compile Include="Api\IRoomEndpoint.cs" />
@@ -60,6 +62,8 @@
     <Compile Include="Api\RoomEndpoint.cs" />
     <Compile Include="Models\AuthenticatedUser.cs" />
     <Compile Include="Models\CheckInModel.cs" />
+    <Compile Include="Models\CheckOutModel.cs" />
+    <Compile Include="Models\ClientInfo.cs" />
     <Compile Include="Models\ClientModel.cs" />
     <Compile Include="Models\ILoggedInUser.cs" />
     <Compile Include="Models\LoggedInUser.cs" />

@@ -74,6 +74,7 @@
     <Compile Include="Helpers\PasswordBoxHelper.cs" />
     <Compile Include="Models\ClientDisplayModel.cs" />
     <Compile Include="ViewModels\CheckInViewModel.cs" />
+    <Compile Include="ViewModels\CheckOutViewModel.cs" />
     <Compile Include="ViewModels\ClientViewModel.cs" />
     <Compile Include="ViewModels\LoginViewModel.cs" />
     <Compile Include="ViewModels\ReservationViewModel.cs" />
@@ -81,6 +82,9 @@
     <Compile Include="ViewModels\ShellViewModel.cs" />
     <Compile Include="Views\CheckInView.xaml.cs">
       <DependentUpon>CheckInView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\CheckOutView.xaml.cs">
+      <DependentUpon>CheckOutView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\ClientView.xaml.cs">
       <DependentUpon>ClientView.xaml</DependentUpon>
@@ -102,6 +106,10 @@
       <SubType>Code</SubType>
     </Compile>
     <Page Include="Views\CheckInView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\CheckOutView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

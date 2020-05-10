@@ -12,6 +12,24 @@ namespace OHMDataManager.Controllers
     [Authorize]
     public class CheckInController : ApiController
     {
+        public List<CheckInModel> Get()
+        {
+            CheckInData data = new CheckInData();
+
+            return data.GetCheckIns();
+        }
+
+
+        [Route("api/CheckIn/PostForCheckIn")]
+        public CheckInModel PostForCheckIn(ClientInfo cInfo)
+        {
+            CheckInData data = new CheckInData();
+
+            return data.GetCheckIn(cInfo);
+        }
+
+
+
         [Route("api/CheckIn/PostForID")]
         public int PostForCheckInID(CheckInModel checkIn)
         {

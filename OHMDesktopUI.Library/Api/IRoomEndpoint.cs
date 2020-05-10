@@ -11,5 +11,6 @@ namespace OHMDesktopUI.Library.Api
         Task PostRoom(RoomModel room);
         Task UpdateRoom(RoomModel room);
         Task DeleteRoom(int id);
+        Task<RoomModel> GetRoom(RoomModel room);
     }
 }

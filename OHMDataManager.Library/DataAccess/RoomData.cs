@@ -21,6 +21,16 @@ namespace OHMDataManager.Library.DataAccess
 
 
 
+        public RoomModel GetRoom(RoomModel room)
+        {
+            SqlDataAccess sql = new SqlDataAccess();
+
+            var output = sql.LoadData<RoomModel, dynamic>("dbo.spRoomLookUp", new { room.RoomNumber }, "OHMData").FirstOrDefault();
+
+            return output;
+        }
+
+
         public int GetRoomID(RoomModel room)
         {
             SqlDataAccess sql = new SqlDataAccess();

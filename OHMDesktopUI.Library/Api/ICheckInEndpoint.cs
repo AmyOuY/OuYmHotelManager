@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using System.Collections.Generic;
+using System.Threading.Tasks;
 using OHMDesktopUI.Library.Models;
 
 namespace OHMDesktopUI.Library.Api
@@ -8,6 +9,8 @@ namespace OHMDesktopUI.Library.Api
         Task DeleteCheckIn(int id);
         Task<int> GetCheckInID(CheckInModel checkIn);
         Task PostCheckIn(CheckInModel checkIn);
+        Task<List<CheckInModel>> GetAllCheckIns();
         Task UpdateCheckIn(CheckInModel checkIn);
+        Task<CheckInModel> GetCheckIn(ClientInfo cInfo);
     }
 }

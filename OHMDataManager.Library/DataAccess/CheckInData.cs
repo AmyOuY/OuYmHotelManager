@@ -10,6 +10,27 @@ namespace OHMDataManager.Library.DataAccess
 {
     public class CheckInData
     {
+
+        public List<CheckInModel> GetCheckIns()
+        {
+            SqlDataAccess sql = new SqlDataAccess();
+
+            var output = sql.LoadData<CheckInModel, dynamic>("dbo.spCheckIn_GetAll", new { }, "OHMData");
+
+            return output;
+        }
+
+
+        public CheckInModel GetCheckIn(ClientInfo cInfo)
+        {
+            SqlDataAccess sql = new SqlDataAccess();
+
+            var output = sql.LoadData<CheckInModel, dynamic>("dbo.spCheckInLookUp", new { cInfo.Client, cInfo.Phone }, "OHMData").FirstOrDefault();
+
+            return output;
+        }
+
+
         public int GetCheckInID(CheckInModel checkIn)
         {
             SqlDataAccess sql = new SqlDataAccess();

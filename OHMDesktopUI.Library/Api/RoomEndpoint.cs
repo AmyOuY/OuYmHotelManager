@@ -48,6 +48,25 @@ namespace OHMDesktopUI.Library.Api
         }
 
 
+
+        public async Task<RoomModel> GetRoom(RoomModel room)
+        {
+            using (HttpResponseMessage response = await _apiHelper.ApiClient.PostAsJsonAsync("api/Room/PostForRoom", room))
+            {
+                if (response.IsSuccessStatusCode)
+                {
+                    var result = await response.Content.ReadAsAsync<RoomModel>();
+
+                    return result;
+                }
+                else
+                {
+                    throw new Exception(response.ReasonPhrase);
+                }
+            }
+        }
+
+
         public async Task<int> GetRoomId(RoomModel room)
         {
             using (HttpResponseMessage response = await _apiHelper.ApiClient.PostAsJsonAsync("/api/Room/PostForID", room))

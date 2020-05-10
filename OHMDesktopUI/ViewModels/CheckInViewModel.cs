@@ -43,7 +43,9 @@ namespace OHMDesktopUI.ViewModels
             {
                 _client = value;
                 NotifyOfPropertyChange(() => Client);
+                FillCheckedIn();
                 NotifyOfPropertyChange(() => CanCheckIn);
+                
             }
         }
 
@@ -58,6 +60,31 @@ namespace OHMDesktopUI.ViewModels
                 _phone = value;
                 NotifyOfPropertyChange(() => Phone);
                 NotifyOfPropertyChange(() => CanCheckIn);
+            }
+        }
+
+
+
+
+        public async Task FillCheckedIn()
+        {
+            List<CheckInModel> allCheckedIns = await _checkInEndpoint.GetAllCheckIns();
+
+            CheckInModel checkedIn = allCheckedIns.Where(x => x.Client == Client).FirstOrDefault();
+
+            if (checkedIn != null)
+            {
+                Phone = checkedIn.Phone;
+                SelectedRoomType = checkedIn.RoomType;
+                SelectedRoomNumber = checkedIn.RoomNumber;
+                RoomTypes = new BindingList<string> { checkedIn.RoomType };
+                RoomNumbers = new BindingList<int> { checkedIn.RoomNumber };               
+                RoomCapacity = checkedIn.RoomCapacity;
+                RoomPrice = checkedIn.RoomPrice;
+                DateIn = checkedIn.DateIn;
+                DateOut = checkedIn.DateOut;
+                StayDays = checkedIn.StayDays;
+                GuestNumber = checkedIn.GuestNumber;            
             }
         }
 

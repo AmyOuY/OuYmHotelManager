@@ -20,6 +20,15 @@ namespace OHMDataManager.Controllers
         }
 
 
+        [Route("api/Room/PostForRoom")]
+        public RoomModel PostForRoom(RoomModel room)
+        {
+            RoomData data = new RoomData();
+
+            return data.GetRoom(room);
+        }
+
+
         [Route("api/Room/PostForID")]
         public int PostForRoomID(RoomModel room)
         {
