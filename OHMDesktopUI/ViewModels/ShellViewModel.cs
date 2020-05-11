@@ -12,17 +12,15 @@ namespace OHMDesktopUI.ViewModels
     {
         private readonly ClientViewModel _clientVM;
         private readonly RoomViewModel _roomVM;
-        private readonly ReservationViewModel _reservationVM;
         private readonly CheckInViewModel _checkInVM;
         private readonly CheckOutViewModel _checkOutVM;
         private readonly IEventAggregator _events;
 
-        public ShellViewModel(ClientViewModel clientVM, RoomViewModel roomVM, ReservationViewModel reservationVM, 
-            CheckInViewModel checkInVM, CheckOutViewModel checkOutVM, IEventAggregator events)
+        public ShellViewModel(ClientViewModel clientVM, RoomViewModel roomVM, CheckInViewModel checkInVM,
+            CheckOutViewModel checkOutVM, IEventAggregator events)
         {
             _clientVM = clientVM;
             _roomVM = roomVM;
-            _reservationVM = reservationVM;
             _checkInVM = checkInVM;
             _checkOutVM = checkOutVM;
             _events = events;
@@ -35,7 +33,7 @@ namespace OHMDesktopUI.ViewModels
         {
             //ActivateItem(_clientVM);
             //ActivateItem(_roomVM);
-            //ActivateItem(_reservationVM);
+            //ActivateItem(_checkInVM);
             ActivateItem(_checkOutVM);
         }
 

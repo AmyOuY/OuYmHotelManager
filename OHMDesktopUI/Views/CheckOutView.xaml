@@ -4,8 +4,8 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:OHMDesktopUI.Views"
-             mc:Ignorable="d" Background="White"
-             d:DesignHeight="450" d:DesignWidth="800">
+             mc:Ignorable="d" Background="White" FontSize="24"
+             d:DesignHeight="620" d:DesignWidth="800">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*" />
@@ -28,7 +28,9 @@
         </Grid.RowDefinitions>
 
         <TextBlock Text="Check Out" Grid.Row="0" Grid.Column="1" HorizontalAlignment="Center" FontSize="36" FontWeight="Bold" />
-        <StackPanel Orientation="Vertical" Grid.Row="1" Grid.Column="1">
+        <TextBlock x:Name="ErrorMessage" Visibility="{Binding IsErrorVisible, Converter={StaticResource BooleanToVisibilityConverter}, FallbackValue=Collapsed}" 
+                   Grid.Row="1" Grid.Column="1" Foreground="Red" Margin="250 5 0 15"/>
+        <StackPanel Orientation="Vertical" Grid.Row="2" Grid.Column="1">
 
             <StackPanel Orientation="Horizontal">
                 <StackPanel Orientation="Horizontal">
@@ -49,7 +51,7 @@
                 </StackPanel>
 
                 <StackPanel Orientation="Horizontal">
-                    <TextBlock Text="Room Number:" Margin="180 20 10 15" />
+                    <TextBlock Text="Room Number:" Margin="150 20 10 15" />
                     <TextBox x:Name="RoomNumber" Width="100" Margin="0 15 0 15" />
                 </StackPanel>
             </StackPanel>
@@ -61,7 +63,7 @@
                 </StackPanel>
 
                 <StackPanel Orientation="Horizontal">
-                    <TextBlock Text="Room Price:" Margin="160 20 10 15" />
+                    <TextBlock Text="Room Price:" Margin="110 20 10 15" />
                     <TextBox x:Name="RoomPrice" Width="120" Margin="0 15 0 15"/>
                 </StackPanel>
             </StackPanel>
@@ -74,7 +76,7 @@
                 </StackPanel>
 
                 <StackPanel Orientation="Horizontal">
-                    <TextBlock Text="Date Out:" Margin="150 20 10 15" />
+                    <TextBlock Text="Date Out:" Margin="140 20 10 15" />
                     <TextBox x:Name="DateOut" Width="150" Margin="0 15 0 15" />
                 </StackPanel>
             </StackPanel>
@@ -87,7 +89,7 @@
                 </StackPanel>
 
                 <StackPanel Orientation="Horizontal">
-                    <TextBlock Text="Number of Guests:" Margin="205 20 10 15" />
+                    <TextBlock Text="Number of Guests:" Margin="170 20 10 15" />
                     <TextBox x:Name="GuestNumber" Width="70" Margin="0 15 0 15"/>
                 </StackPanel>
             </StackPanel>
@@ -111,9 +113,9 @@
         </DockPanel>
 
 
-        <Button x:Name="CheckOut" Content="Check Out" Grid.Row="9" Grid.Column="1" Width="120" Margin="0 0 50 15" Padding="10 5" />
+        <Button x:Name="CheckOut" Content="Check Out" Grid.Row="9" Grid.Column="1" Width="140" Margin="0 20 50 15" Padding="10 5" />
 
-        <Button x:Name="ClearCheckOut" Content="Clear" Grid.Row="9" Grid.Column="1" Width="50" Margin="400 0 50 15" Padding="10 5" />
+        <Button x:Name="ClearCheckOut" Content="Clear" Grid.Row="9" Grid.Column="1" Width="80" Margin="400 20 50 15" Padding="10 5" />
 
     </Grid>
 </UserControl>

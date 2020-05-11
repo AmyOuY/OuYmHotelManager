@@ -10,12 +10,13 @@
 	@DateOut datetime2,
 	@StayDays int,
 	@GuestNumber int,
+	@IsCheckedOut bit,
 	@CreatedDate datetime2
 AS
 begin
 	set nocount on;
 
 	update dbo.CheckIn
-	set Client = @Client, Phone = @Phone, RoomType = @RoomType, RoomNumber = @RoomNumber, RoomCapacity = @RoomCapacity, RoomPrice = @RoomPrice, DateIn = @DateIn, DateOut = @DateOut, StayDays = @StayDays, GuestNumber = @GuestNumber, CreatedDate = @CreatedDate
+	set Client = @Client, Phone = @Phone, RoomType = @RoomType, RoomNumber = @RoomNumber, RoomCapacity = @RoomCapacity, RoomPrice = @RoomPrice, DateIn = @DateIn, DateOut = @DateOut, StayDays = @StayDays, GuestNumber = @GuestNumber, IsCheckedOut = @IsCheckedOut, CreatedDate = @CreatedDate
 	where Id = @Id;
 end

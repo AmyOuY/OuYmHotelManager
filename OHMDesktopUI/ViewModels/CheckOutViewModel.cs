@@ -104,6 +104,21 @@ namespace OHMDesktopUI.ViewModels
 
             CheckInModel checkedIn = allCheckIns.Where(x => x.RoomNumber == RoomNumber).FirstOrDefault();
 
+            ErrorMessage = "";
+
+            if (RoomNumber > 0 && checkedIn == null)
+            {
+                ErrorMessage = "Error! Room not checked in!";
+                return;
+            }
+            else if (RoomNumber < 0)
+            {
+                ErrorMessage = "Error! Room number does not exist!";
+                return;
+            }
+
+
+
             Client = checkedIn.Client;
             Phone = checkedIn.Phone;
             RoomType = checkedIn.RoomType;
@@ -115,6 +130,38 @@ namespace OHMDesktopUI.ViewModels
             StayDays = checkedIn.StayDays;
             GuestNumber = checkedIn.GuestNumber;
         }
+
+
+
+        private string _errorMessage;
+
+        public string ErrorMessage
+        {
+            get { return _errorMessage; }
+            set
+            {
+                _errorMessage = value;
+                NotifyOfPropertyChange(() => ErrorMessage);
+                NotifyOfPropertyChange(() => IsErrorVisible);
+            }
+        }
+
+
+        public bool IsErrorVisible
+        {
+            get
+            {
+                bool output = false;
+
+                if (ErrorMessage?.Length > 0)
+                {
+                    output = true;
+                }
+
+                return output;
+            }
+        }
+
 
 
         private int _roomCapacity;
@@ -300,10 +347,10 @@ namespace OHMDesktopUI.ViewModels
 
             RoomModel checkedInRoom = await _roomEndpoint.GetRoom(room);
             checkedInRoom.IsAvailable = true;
-
             await _roomEndpoint.UpdateRoom(checkedInRoom);
 
-            await _checkInEndpoint.DeleteCheckIn(checkedIn.Id);
+            checkedIn.IsCheckedOut = true;
+            await _checkInEndpoint.UpdateCheckIn(checkedIn);
 
             ClearCheckOut();
         }
@@ -312,6 +359,7 @@ namespace OHMDesktopUI.ViewModels
 
         public void ClearCheckOut()
         {
+            ErrorMessage = "";
             Client = "";
             Phone = "";
             RoomType = "";

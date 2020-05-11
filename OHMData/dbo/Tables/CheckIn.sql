@@ -11,5 +11,6 @@
     [DateOut] DATETIME2 NOT NULL, 
     [StayDays] INT NOT NULL, 
     [GuestNumber] INT NOT NULL, 
+	[IsCheckedOut] BIT NOT NULL DEFAULT 0,
     [CreatedDate] DATETIME2 NOT NULL DEFAULT getutcdate()
 )

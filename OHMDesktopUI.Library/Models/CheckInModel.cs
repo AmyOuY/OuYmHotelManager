@@ -30,6 +30,8 @@ namespace OHMDesktopUI.Library.Models
 
         public int GuestNumber { get; set; }
 
+        public bool IsCheckedOut { get; set; }
+
         public DateTime CreatedDate { get; set; } = DateTime.Now;
     }
 }

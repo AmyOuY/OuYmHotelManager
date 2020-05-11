@@ -14,11 +14,13 @@ namespace OHMDesktopUI.ViewModels
     {
         private readonly IRoomEndpoint _roomEndpoint;
         private readonly ICheckInEndpoint _checkInEndpoint;
+        private readonly IClientEndpoint _clientEndpoint;
 
-        public CheckInViewModel(IRoomEndpoint roomEndpoint, ICheckInEndpoint checkInEndpoint)
+        public CheckInViewModel(IRoomEndpoint roomEndpoint, ICheckInEndpoint checkInEndpoint, IClientEndpoint clientEndpoint)
         {
             _roomEndpoint = roomEndpoint;
             _checkInEndpoint = checkInEndpoint;
+            _clientEndpoint = clientEndpoint;
         }
 
         private int _id;
@@ -30,6 +32,7 @@ namespace OHMDesktopUI.ViewModels
             {
                 _id = value;
                 NotifyOfPropertyChange(() => Id);
+                NotifyOfPropertyChange(() => CanRemoveCheckIn);
             }
         }
 
@@ -44,10 +47,41 @@ namespace OHMDesktopUI.ViewModels
                 _client = value;
                 NotifyOfPropertyChange(() => Client);
                 FillCheckedIn();
+
                 NotifyOfPropertyChange(() => CanCheckIn);
-                
             }
         }
+
+
+        public bool IsErrorVisible
+        {
+            get
+            {
+                bool output = false;
+                if (ErrorMessage?.Length > 0)
+                {
+                    output = true;
+                }
+
+                return output;
+            }
+        }
+
+
+
+        private string _errorMessage;
+
+        public string ErrorMessage
+        {
+            get { return _errorMessage; }
+            set
+            {
+                _errorMessage = value;
+                NotifyOfPropertyChange(() => ErrorMessage);
+                NotifyOfPropertyChange(() => IsErrorVisible);               
+            }
+        }
+
 
 
         private string _phone;
@@ -65,15 +99,35 @@ namespace OHMDesktopUI.ViewModels
 
 
 
-
         public async Task FillCheckedIn()
-        {
+        {           
+            bool clientRegistered = false;
+            string[] names = Client.Split(null);
+            ErrorMessage = "";
+
+            List<ClientModel> allClients = await _clientEndpoint.GetAllClients();
+
+            foreach (ClientModel client in allClients)
+            {
+                if (client.FirstName == names[0] && client.LastName == names[1])
+                {
+                    clientRegistered = true;
+                }
+            }
+
+            if (Client?.Length > 0 && clientRegistered == false)
+            {
+                ErrorMessage = "Error! You need to register client first!";
+                return;
+            }
+
             List<CheckInModel> allCheckedIns = await _checkInEndpoint.GetAllCheckIns();
 
             CheckInModel checkedIn = allCheckedIns.Where(x => x.Client == Client).FirstOrDefault();
 
             if (checkedIn != null)
             {
+                Id = checkedIn.Id;
                 Phone = checkedIn.Phone;
                 SelectedRoomType = checkedIn.RoomType;
                 SelectedRoomNumber = checkedIn.RoomNumber;
@@ -84,9 +138,24 @@ namespace OHMDesktopUI.ViewModels
                 DateIn = checkedIn.DateIn;
                 DateOut = checkedIn.DateOut;
                 StayDays = checkedIn.StayDays;
-                GuestNumber = checkedIn.GuestNumber;            
+                GuestNumber = checkedIn.GuestNumber;
             }
         }
+
+
+
+        private CheckInModel _originalCheckIn;
+
+        public CheckInModel OriginalCheckIn
+        {
+            get { return _originalCheckIn; }
+            set
+            {
+                _originalCheckIn = value;
+                NotifyOfPropertyChange(() => OriginalCheckIn);
+            }
+        }
+
 
 
         private BindingList<string> _roomTypes = new BindingList<string> { "single", "double", "triple", "quad" };
@@ -146,6 +215,7 @@ namespace OHMDesktopUI.ViewModels
         }
 
 
+ 
         private int _selectedRoomNumber;
 
         public int SelectedRoomNumber
@@ -159,6 +229,7 @@ namespace OHMDesktopUI.ViewModels
                 NotifyOfPropertyChange(() => RoomCapacity);
                 NotifyOfPropertyChange(() => RoomPrice);
                 NotifyOfPropertyChange(() => CanCheckIn);
+                
             }
         }
 
@@ -202,10 +273,21 @@ namespace OHMDesktopUI.ViewModels
         }
 
 
+      
+        private DateTime _dateIn = DateTime.Now;
 
-       
-        public DateTime DateIn { get; set; } = DateTime.Now;
+        public DateTime DateIn
+        {
+            get { return _dateIn; }
+            set
+            {               
+                _dateIn = value;              
+                NotifyOfPropertyChange(() => DateIn);            
+            }
+        }
 
+
+  
         private DateTime _dateOut = DateTime.Now;
      
         public DateTime DateOut
@@ -234,6 +316,7 @@ namespace OHMDesktopUI.ViewModels
                 NotifyOfPropertyChange(() => CanCheckIn);
             }
         }
+
 
 
         private int _guestNumber;
@@ -295,8 +378,10 @@ namespace OHMDesktopUI.ViewModels
         }
 
 
-        private void ClearCheckIn()
-        {
+        public void ClearCheckIn()
+        {           
+            ErrorMessage = "";
+            Id = 0;
             Client = "";
             Phone = "";
             RoomTypes = new BindingList<string>();
@@ -308,6 +393,44 @@ namespace OHMDesktopUI.ViewModels
             DateOut = DateTime.Now;
             StayDays = 0;
             GuestNumber = 0;
+        }
+
+
+
+        public bool CanRemoveCheckIn
+        {
+            get
+            {
+                bool output = false;
+
+                if (Id > 0)
+                {
+                    output = true;
+                }
+
+                return output;
+            }
+        }
+ 
+
+
+        public async Task RemoveCheckIn()
+        {
+
+            RoomModel roomInfo = new RoomModel
+            {
+                RoomNumber = SelectedRoomNumber
+            };
+
+            RoomModel room = await _roomEndpoint.GetRoom(roomInfo);
+
+            room.IsAvailable = true;
+
+            await _roomEndpoint.UpdateRoom(room);
+
+            await _checkInEndpoint.DeleteCheckIn(Id);
+            
+            ClearCheckIn();
         }
     }
 }

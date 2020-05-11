@@ -70,7 +70,6 @@
     <Build Include="dbo\Tables\User.sql" />
     <Build Include="dbo\Tables\Client.sql" />
     <Build Include="dbo\Tables\Room.sql" />
-    <Build Include="dbo\Tables\Reservation.sql" />
     <Build Include="dbo\Stored Procedures\spUserLookUp.sql" />
     <Build Include="dbo\Stored Procedures\spClient_GetAll.sql" />
     <Build Include="dbo\Stored Procedures\spClient_Insert.sql" />
@@ -82,12 +81,6 @@
     <Build Include="dbo\Stored Procedures\spRoom_Remove.sql" />
     <Build Include="dbo\Stored Procedures\spRoom_Update.sql" />
     <Build Include="dbo\Stored Procedures\spRoomIDLookUp.sql" />
-    <Build Include="dbo\Stored Procedures\spReservation_GetAll.sql" />
-    <Build Include="dbo\Stored Procedures\spReservation_Insert.sql" />
-    <Build Include="dbo\Stored Procedures\spReservation_Remove.sql" />
-    <Build Include="dbo\Stored Procedures\spReservation_Update.sql" />
-    <Build Include="dbo\Stored Procedures\spReservationIDLookUp.sql" />
-    <Build Include="dbo\Stored Procedures\spClientLookUp.sql" />
     <Build Include="dbo\Stored Procedures\spCheckIn_Insert.sql" />
     <Build Include="dbo\Tables\CheckIn.sql" />
     <Build Include="dbo\Stored Procedures\spCheckIn_Update.sql" />

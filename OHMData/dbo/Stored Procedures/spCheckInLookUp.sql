@@ -6,7 +6,7 @@ AS
 begin
 	set nocount on;
 
-	select Id, Client, Phone, RoomType, RoomNumber, RoomCapacity, RoomPrice, DateIn, DateOut, StayDays, GuestNumber, CreatedDate
+	select Id, Client, Phone, RoomType, RoomNumber, RoomCapacity, RoomPrice, DateIn, DateOut, StayDays, GuestNumber, IsCheckedOut, CreatedDate
 	from dbo.CheckIn
 	where Client = @Client and Phone = @Phone;
 end

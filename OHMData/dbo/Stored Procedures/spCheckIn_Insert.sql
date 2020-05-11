@@ -10,13 +10,14 @@
 	@DateOut datetime2,
 	@StayDays int,
 	@GuestNumber int,
+	@IsCheckedOut bit,
 	@CreatedDate datetime2
 AS
 begin 
 	set nocount on;
 
-	insert into dbo.CheckIn (Client, Phone, RoomType, RoomNumber, RoomCapacity, RoomPrice, DateIn, DateOut, StayDays, GuestNumber, CreatedDate)
-	values (@Client, @Phone, @RoomType, @RoomNumber, @RoomCapacity, @RoomPrice, @DateIn, @DateOut, @StayDays, @GuestNumber, @CreatedDate);
+	insert into dbo.CheckIn (Client, Phone, RoomType, RoomNumber, RoomCapacity, RoomPrice, DateIn, DateOut, StayDays, GuestNumber, IsCheckedOut, CreatedDate)
+	values (@Client, @Phone, @RoomType, @RoomNumber, @RoomCapacity, @RoomPrice, @DateIn, @DateOut, @StayDays, @GuestNumber, @IsCheckedOut, @CreatedDate);
 
 	select @Id = SCOPE_IDENTITY();
 end
