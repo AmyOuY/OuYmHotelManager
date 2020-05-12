@@ -8,15 +8,31 @@
         Title="ShellView" Height="550" Width="800">
     <DockPanel>
         <Menu DockPanel.Dock="Top" FontSize="18">
-            <MenuItem Header="_File"></MenuItem>
-            <MenuItem Header="_Account">
-                <MenuItem x:Name="Login" Header="_Login" />
+            
+            <MenuItem Header="_File">
+                <MenuItem x:Name="ExitApplication" Header="_Exit" />
             </MenuItem>
-            <MenuItem x:Name ="Reservation" Header="_Reservation"></MenuItem>
-            <MenuItem x:Name ="Client" Header="_Client"></MenuItem>
-            <MenuItem x:Name ="Room" Header="_Room"></MenuItem>
-            <MenuItem x:Name ="CheckIn" Header="Check_In"></MenuItem>
-            <MenuItem x:Name ="CheckOut" Header="Check_Out"></MenuItem>
+
+            <MenuItem Header="_Account" Visibility="{Binding IsLoggedIn, Converter={StaticResource BooleanToVisibilityConverter}, FallbackValue=Collapsed}">
+                <MenuItem x:Name="LogOut" Header="_LogOut" />
+            </MenuItem>
+
+            <MenuItem Header="_Rooms" Visibility="{Binding IsLoggedIn, Converter={StaticResource BooleanToVisibilityConverter}, FallbackValue=Collapsed}">
+                <MenuItem x:Name ="Room" Header="Room Management" />
+            </MenuItem>
+
+            <MenuItem Header="_Clients" Visibility="{Binding IsLoggedIn, Converter={StaticResource BooleanToVisibilityConverter}, FallbackValue=Collapsed}">
+                <MenuItem x:Name ="Client" Header="Client Management" />
+            </MenuItem>
+
+            <MenuItem Header="Check_In" Visibility="{Binding IsLoggedIn, Converter={StaticResource BooleanToVisibilityConverter}, FallbackValue=Collapsed}">
+                <MenuItem x:Name ="CheckIn" Header="CheckIn Management" />
+            </MenuItem>
+
+            <MenuItem Header="Check_Out" Visibility="{Binding IsLoggedIn, Converter={StaticResource BooleanToVisibilityConverter}, FallbackValue=Collapsed}">
+                <MenuItem x:Name ="CheckOut" Header="CheckOut Management" />
+            </MenuItem>
+            
         </Menu>
 
         <Grid>

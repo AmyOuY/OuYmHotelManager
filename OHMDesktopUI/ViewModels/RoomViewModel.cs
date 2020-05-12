@@ -260,7 +260,10 @@ namespace OHMDesktopUI.ViewModels
         public void ResetRoomModel()
         {
             RoomNumber = 0;
+            SelectedRoomType = "";
+            SelectedRoomCapacity = 0;
             RoomPrice = 0;
+            SelectedIsAvailable = false;
             Description = "";           
         }
 

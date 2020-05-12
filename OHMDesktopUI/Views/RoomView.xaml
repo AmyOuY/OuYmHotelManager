@@ -4,8 +4,8 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:OHMDesktopUI.Views"
-             mc:Ignorable="d" Background="White"
-             d:DesignHeight="450" d:DesignWidth="800">
+             mc:Ignorable="d" Background="White" FontSize="24"
+             d:DesignHeight="650" d:DesignWidth="800">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*" />
@@ -27,39 +27,40 @@
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
 
-        <TextBlock Text="Room" Grid.Row="0" Grid.Column="0" Margin="0 0 0 20" HorizontalAlignment="Center" FontSize="36" FontWeight="Bold" />
+        <TextBlock Text="Room" Grid.Row="0" Grid.Column="0" Margin="0 0 0 10" HorizontalAlignment="Center" FontSize="36" FontWeight="Bold" />
         <StackPanel Orientation="Vertical" Grid.Row="1" Grid.Column="0">
 
-            <StackPanel Orientation="Horizontal">
-                <TextBlock Text="Room Number:" Margin="20 0 10 15" />
-                <TextBox x:Name="RoomNumber" MinWidth="100" Margin="0 0 10 15"/>
+            <StackPanel Orientation="Horizontal" Margin="0 0 0 10">
+                <TextBlock Text="Room Number:" Margin="20 0 10 0" />
+                <TextBox x:Name="RoomNumber" MinWidth="100" Height="40" Margin="0 0 10 15"/>
             </StackPanel>
 
-            <StackPanel Orientation="Horizontal">
-                <TextBlock Text="Room Type:" Margin="20 0 10 15" />
-                <ComboBox x:Name="RoomTypes" />
+            <StackPanel Orientation="Horizontal" Margin="0 0 0 10">
+                <TextBlock Text="Room Type:" Margin="20 0 10 0" />
+                <ComboBox x:Name="RoomTypes" Width="100" Height="40" />
             </StackPanel>
 
-            <StackPanel Orientation="Horizontal">
-                <TextBlock Text="Room Capacity:" Margin="20 0 10 15" />
-                <ComboBox x:Name="RoomCapacities" />
+            <StackPanel Orientation="Horizontal" Margin="0 0 0 10">
+                <TextBlock Text="Room Capacity:" Margin="20 0 10 0" />
+                <ComboBox x:Name="RoomCapacities" Width="100" Height="40" />
             </StackPanel>
 
-            <StackPanel Orientation="Horizontal">
-                <TextBlock Text="Room Price:" Margin="20 0 10 15" />
-                <TextBox x:Name="RoomPrice" MinWidth="100" Margin="0 0 10 15" />
+            <StackPanel Orientation="Horizontal" Margin="0 0 0 10">
+                <TextBlock Text="Room Price:" Margin="20 10 10 0" />
+                <TextBox x:Name="RoomPrice" MinWidth="100" Height="40" Margin="0 10 10 15" />
             </StackPanel>
 
-            <StackPanel Orientation="Horizontal">
-                <TextBlock Text="IsAvailable:" Margin="20 0 10 15" />
-                <!--<TextBox x:Name="IsAvailable" MinWidth="50" Margin="0 0 10 15" />-->
-                <ComboBox x:Name="IsAvailables" />
+            <StackPanel Orientation="Horizontal" Margin="0 0 0 10">
+                <TextBlock Text="IsAvailable:" Margin="20 0 10 0" />
+                <ComboBox x:Name="IsAvailables" Width="100" Height="40" />
             </StackPanel>
 
-            <StackPanel Orientation="Horizontal">
-                <TextBlock Text="Description:" Margin="20 0 10 15" />
-                <TextBox x:Name="Description" TextWrapping="Wrap" Width="200" Height="100" Margin="0 0 10 15" />
+            <StackPanel Orientation="Horizontal" Margin="0 0 0 10">
+                <TextBlock Text="Description:" Margin="20 0 10 0" />
+                <TextBox x:Name="Description" TextWrapping="Wrap" Width="400" MinHeight="150" Margin="0 0 10 15" />
             </StackPanel>
+
+            <Button x:Name="ResetRoomModel" Content="Clear" Width="80" Margin="0 10 20 15" Padding="10 5" />
 
             <Button x:Name="AddRoom" Content="Add New Room" Width="200" Margin="0 10 20 15" Padding="10 5" />
         </StackPanel>
@@ -69,7 +70,7 @@
             <Button x:Name="RemoveRoom" Content="Remove" Margin="20 20 0 10" Padding="10 5" />
         </StackPanel>
 
-        <DataGrid x:Name="Rooms" Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="4" MinWidth="450" MinHeight="350">
+        <DataGrid x:Name="Rooms" Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="4" MinWidth="400" MinHeight="350">
         </DataGrid>
 
     </Grid>

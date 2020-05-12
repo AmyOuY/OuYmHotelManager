@@ -35,36 +35,36 @@
             <StackPanel Orientation="Horizontal">
                 <StackPanel Orientation="Horizontal">
                     <TextBlock Text="Client:" Margin="0 20 10 15" />
-                    <TextBox x:Name="Client" Width="200" Margin="0 15 10 15"/>
+                    <TextBox x:Name="Client" MinWidth="200" Margin="0 15 10 15"/>
                 </StackPanel>
 
                 <StackPanel Orientation="Horizontal">
                     <TextBlock Text="Phone:" Margin="100 20 10 15" />
-                    <TextBox x:Name="Phone" Width="250" Margin="0 15 0 15"/>
+                    <TextBox x:Name="Phone" MinWidth="250" Margin="0 15 0 15"/>
                 </StackPanel>
             </StackPanel>
 
             <StackPanel Orientation="Horizontal">
                 <StackPanel Orientation="Horizontal">
                     <TextBlock Text="Room Type:" Margin="0 20 10 15" />
-                    <TextBox x:Name="RoomType" Width="100" Margin="0 15 0 15" />
+                    <TextBox x:Name="RoomType" MinWidth="100" Margin="0 15 0 15" />
                 </StackPanel>
 
                 <StackPanel Orientation="Horizontal">
                     <TextBlock Text="Room Number:" Margin="150 20 10 15" />
-                    <TextBox x:Name="RoomNumber" Width="100" Margin="0 15 0 15" />
+                    <TextBox x:Name="RoomNumber" MinWidth="100" Margin="0 15 0 15" />
                 </StackPanel>
             </StackPanel>
 
             <StackPanel Orientation="Horizontal">
                 <StackPanel Orientation="Horizontal">
                     <TextBlock Text="Room Capacity:" Margin="0 20 10 15" />
-                    <TextBox x:Name="RoomCapacity" Width="90" Margin="0 15 10 15"/>
+                    <TextBox x:Name="RoomCapacity" MinWidth="90" Margin="0 15 10 15"/>
                 </StackPanel>
 
                 <StackPanel Orientation="Horizontal">
                     <TextBlock Text="Room Price:" Margin="110 20 10 15" />
-                    <TextBox x:Name="RoomPrice" Width="120" Margin="0 15 0 15"/>
+                    <TextBox x:Name="RoomPrice" MinWidth="120" Margin="0 15 0 15"/>
                 </StackPanel>
             </StackPanel>
 
@@ -72,12 +72,12 @@
             <StackPanel Orientation="Horizontal">
                 <StackPanel Orientation="Horizontal">
                     <TextBlock Text="Date In:" Margin="0 20 10 15" />
-                    <TextBox x:Name="DateIn" Width="150" Margin="0 15 0 15" />
+                    <TextBox x:Name="DateIn" MinWidth="150" Margin="0 15 0 15" />
                 </StackPanel>
 
                 <StackPanel Orientation="Horizontal">
                     <TextBlock Text="Date Out:" Margin="140 20 10 15" />
-                    <TextBox x:Name="DateOut" Width="150" Margin="0 15 0 15" />
+                    <TextBox x:Name="DateOut" MinWidth="150" Margin="0 15 0 15" />
                 </StackPanel>
             </StackPanel>
 
@@ -85,12 +85,12 @@
             <StackPanel Orientation="Horizontal">
                 <StackPanel Orientation="Horizontal">
                     <TextBlock Text="Days of Stay:" Margin="0 20 10 15" />
-                    <TextBox x:Name="StayDays" Width="70" Margin="0 15 0 15"/>
+                    <TextBox x:Name="StayDays" MinWidth="70" Margin="0 15 0 15"/>
                 </StackPanel>
 
                 <StackPanel Orientation="Horizontal">
                     <TextBlock Text="Number of Guests:" Margin="170 20 10 15" />
-                    <TextBox x:Name="GuestNumber" Width="70" Margin="0 15 0 15"/>
+                    <TextBox x:Name="GuestNumber" MinWidth="70" Margin="0 15 0 15"/>
                 </StackPanel>
             </StackPanel>
           

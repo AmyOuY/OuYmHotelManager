@@ -1,5 +1,7 @@
 ﻿using Caliburn.Micro;
 using OHMDesktopUI.EventModels;
+using OHMDesktopUI.Library.Api;
+using OHMDesktopUI.Library.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,15 +17,21 @@ namespace OHMDesktopUI.ViewModels
         private readonly CheckInViewModel _checkInVM;
         private readonly CheckOutViewModel _checkOutVM;
         private readonly IEventAggregator _events;
+        private readonly BlankViewModel _blankVM;
+        private readonly ILoggedInUser _user;
+        private readonly IAPIHelper _apiHelper;
 
-        public ShellViewModel(ClientViewModel clientVM, RoomViewModel roomVM, CheckInViewModel checkInVM,
-            CheckOutViewModel checkOutVM, IEventAggregator events)
+        public ShellViewModel(ClientViewModel clientVM, RoomViewModel roomVM, CheckInViewModel checkInVM, CheckOutViewModel checkOutVM,
+            IEventAggregator events, BlankViewModel blankVM, ILoggedInUser user, IAPIHelper apiHelper)
         {
             _clientVM = clientVM;
             _roomVM = roomVM;
             _checkInVM = checkInVM;
             _checkOutVM = checkOutVM;
             _events = events;
+            _blankVM = blankVM;
+            _user = user;
+            _apiHelper = apiHelper;
             _events.Subscribe(this);
             ActivateItem(IoC.Get<LoginViewModel>());
         }
@@ -31,10 +39,8 @@ namespace OHMDesktopUI.ViewModels
 
         public void Handle(LogOnEvent message)
         {
-            //ActivateItem(_clientVM);
-            //ActivateItem(_roomVM);
-            //ActivateItem(_checkInVM);
-            ActivateItem(_checkOutVM);
+            ActivateItem(_blankVM);
+            NotifyOfPropertyChange(() => IsLoggedIn);
         }
 
 
@@ -43,6 +49,61 @@ namespace OHMDesktopUI.ViewModels
             ActivateItem(_checkInVM);
             _checkInVM.Client = message.Client;
             _checkInVM.Phone = message.Phone;
+        }
+
+
+        public bool IsLoggedIn
+        {
+            get
+            {
+                bool output = false;
+
+                if (string.IsNullOrWhiteSpace(_user.Token) == false)
+                {
+                    output = true;
+                }
+
+                return output;
+            }
+        }
+
+
+        public void ExitApplication()
+        {
+            TryClose();
+        }
+
+
+        public void LogOut()
+        {
+            _user.ResetUser();
+            _apiHelper.LogOffUser();
+            ActivateItem(IoC.Get<LoginViewModel>());
+            NotifyOfPropertyChange(() => IsLoggedIn);
+        }
+
+
+        public void Room()
+        {
+            ActivateItem(_roomVM);
+        }
+
+
+        public void Client()
+        {
+            ActivateItem(_clientVM);
+        }
+
+
+        public void CheckIn()
+        {
+            ActivateItem(_checkInVM);
+        }
+
+
+        public void CheckOut()
+        {
+            ActivateItem(_checkOutVM);
         }
     }
 }
