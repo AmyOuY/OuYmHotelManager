@@ -4,19 +4,25 @@ using OHMDesktopUI.Library.Models;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Dynamic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 
 namespace OHMDesktopUI.ViewModels
 {
     public class RoomViewModel : Screen
     {
         private readonly IRoomEndpoint _roomEndpoint;
+        private readonly StatusInfoViewModel _status;
+        private readonly IWindowManager _window;
 
-        public RoomViewModel(IRoomEndpoint roomEndpoint)
+        public RoomViewModel(IRoomEndpoint roomEndpoint, StatusInfoViewModel status, IWindowManager window)
         {
             _roomEndpoint = roomEndpoint;
+            _status = status;
+            _window = window;
         }
 
 
@@ -24,7 +30,30 @@ namespace OHMDesktopUI.ViewModels
         {
             base.OnViewLoaded(view);
 
-            await LoadRooms();
+            try
+            {
+                await LoadRooms();
+            }
+            catch (Exception ex)
+            {
+
+                dynamic settings = new ExpandoObject();
+                settings.WindowStartupLocation = WindowStartupLocation.CenterOwner;
+                settings.ResizeMode = ResizeMode.NoResize;
+                settings.Title = "System Error";
+                if (ex.Message == "Unauthorized")
+                {
+                    _status.UpdateMessage("Unauthorized Access", "You don't have permission to interact with the Room form.");
+                    _window.ShowDialog(_status, null, settings);
+                }
+                else
+                {
+                    _status.UpdateMessage("Fatal Exception", ex.Message);
+                    _window.ShowDialog(_status, null, settings);
+                }
+
+                TryClose();
+            }
         }
 
         
@@ -298,6 +327,8 @@ namespace OHMDesktopUI.ViewModels
             };
 
             await _roomEndpoint.UpdateRoom(room);
+
+            SelectedRoom = null;
         }
 
 
@@ -322,6 +353,8 @@ namespace OHMDesktopUI.ViewModels
             await _roomEndpoint.DeleteRoom(SelectedRoom.Id);
             Rooms.Remove(SelectedRoom);
             NotifyOfPropertyChange(() => Rooms);
+
+            SelectedRoom = null;
         }
 
     }

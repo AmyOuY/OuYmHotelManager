@@ -46,12 +46,12 @@
             <StackPanel Orientation="Horizontal">
                 <StackPanel Orientation="Horizontal">
                     <TextBlock Text="Room Type:" Margin="0 20 10 15" />
-                    <ComboBox x:Name="RoomTypes" Width="100" Height="40" />
+                    <ComboBox x:Name="RoomTypes" SelectedItem="SelectedRoomType" Width="100" Height="40" />
                 </StackPanel>
 
                 <StackPanel Orientation="Horizontal">
                     <TextBlock Text="Room Number:" Margin="150 20 10 15" />
-                    <ComboBox x:Name="RoomNumbers" Width="100" Height="40" />
+                    <ComboBox x:Name="RoomNumbers" SelectedItem="SelectedRoomNumber" Width="100" Height="40" />
                 </StackPanel>
             </StackPanel>
 
@@ -94,10 +94,12 @@
             </StackPanel>
 
             <StackPanel Orientation="Horizontal">
-                <Button x:Name="CheckIn" Content="Check In" Width="120" Margin="110 30 50 15" Padding="10 5" />
-                <Button x:Name="ClearCheckIn" Content="Clear" Width="90" Margin="0 30 50 15" Padding="10 5" />
-                <Button x:Name="RemoveCheckIn" Content="Remove Check In" Width="210" Margin="0 30 50 15" Padding="10 5" />
+                <Button x:Name="CheckIn" Content="Check In" Width="120" Margin="95 20 0 0" Padding="10 5" />
+                <Button x:Name="ClearCheckIn" Content="Clear" Width="120" Margin="50 20 0 0" Padding="10 5" />
+                <Button x:Name="RemoveCheckIn" Content="Remove CheckIn" Width="200" Margin="50 20 0 0" Padding="10 5" />
+
             </StackPanel>
+            
         </StackPanel>
 
     </Grid>

@@ -9,7 +9,7 @@ using System.Web.Http;
 
 namespace OHMDataManager.Controllers
 {
-    [Authorize]
+    [Authorize(Roles = "Receptionist")]
     public class ClientController : ApiController
     {
         public List<ClientModel> Get()

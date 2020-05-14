@@ -91,6 +91,7 @@
     <Build Include="dbo\Stored Procedures\spCheckIn_GetAll.sql" />
     <Build Include="dbo\Stored Procedures\spCheckInLookUp.sql" />
     <Build Include="dbo\Stored Procedures\spRoomLookUp.sql" />
+    <Build Include="dbo\Stored Procedures\spSaleReport.sql" />
   </ItemGroup>
   <ItemGroup>
     <RefactorLog Include="OHMData.refactorlog" />

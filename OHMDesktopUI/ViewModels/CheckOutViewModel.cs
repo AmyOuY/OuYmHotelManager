@@ -97,38 +97,49 @@ namespace OHMDesktopUI.ViewModels
         }
 
 
+        public CheckInModel CheckedIn { get; set; }
+
 
         public async Task GetCheckedInInfo()
         {
             List<CheckInModel> allCheckIns = await _checkInEndpoint.GetAllCheckIns();
+            allCheckIns = allCheckIns.OrderByDescending(x => x.CreatedDate).ToList();
 
-            CheckInModel checkedIn = allCheckIns.Where(x => x.RoomNumber == RoomNumber).FirstOrDefault();
+            CheckedIn = allCheckIns.Where(x => x.RoomNumber == RoomNumber).FirstOrDefault();
 
             ErrorMessage = "";
 
-            if (RoomNumber > 0 && checkedIn == null)
+            if (RoomNumber > 0)
             {
-                ErrorMessage = "Error! Room not checked in!";
-                return;
+                if (CheckedIn == null)
+                {
+                    ErrorMessage = "Error! Room not checked in!";
+                    return;
+                }
+                else if (CheckedIn.IsCheckedOut == true)
+                {
+                    ErrorMessage = "Error! Room already checked out!";
+                    return;
+                }
+                else
+                {
+                    Client = CheckedIn.Client;
+                    Phone = CheckedIn.Phone;
+                    RoomType = CheckedIn.RoomType;
+                    RoomNumber = CheckedIn.RoomNumber;
+                    RoomCapacity = CheckedIn.RoomCapacity;
+                    RoomPrice = CheckedIn.RoomPrice;
+                    DateIn = CheckedIn.DateIn;
+                    DateOut = CheckedIn.DateOut;
+                    StayDays = CheckedIn.StayDays;
+                    GuestNumber = CheckedIn.GuestNumber;
+                }
             }
             else if (RoomNumber < 0)
             {
                 ErrorMessage = "Error! Room number does not exist!";
                 return;
-            }
-
-
-
-            Client = checkedIn.Client;
-            Phone = checkedIn.Phone;
-            RoomType = checkedIn.RoomType;
-            RoomNumber = checkedIn.RoomNumber;
-            RoomCapacity = checkedIn.RoomCapacity;
-            RoomPrice = checkedIn.RoomPrice;
-            DateIn = checkedIn.DateIn;
-            DateOut = checkedIn.DateOut;
-            StayDays = checkedIn.StayDays;
-            GuestNumber = checkedIn.GuestNumber;
+            }           
         }
 
 
@@ -310,7 +321,7 @@ namespace OHMDesktopUI.ViewModels
             {
                 bool output = false;
 
-                if (RoomNumber > 0)
+                if (CheckedIn != null && CheckedIn.IsCheckedOut == false)
                 {
                     output = true;
                 }
@@ -322,17 +333,9 @@ namespace OHMDesktopUI.ViewModels
 
         public async Task CheckOut()
         {
-            ClientInfo cInfo = new ClientInfo
-            {
-                Client = Client,
-                Phone = Phone
-            };
-
-            CheckInModel checkedIn = await _checkInEndpoint.GetCheckIn(cInfo);
-
             CheckOutModel checkOut = new CheckOutModel
             {
-                CheckInID = checkedIn.Id,
+                CheckInID = CheckedIn.Id,
                 SubTotal = CalculateSubTotal(),
                 Tax = CalculateTax(),
                 Total = CalculateSubTotal() + CalculateTax()
@@ -342,15 +345,15 @@ namespace OHMDesktopUI.ViewModels
 
             RoomModel room = new RoomModel
             {
-                RoomNumber = checkedIn.RoomNumber
+                RoomNumber = CheckedIn.RoomNumber
             };
 
             RoomModel checkedInRoom = await _roomEndpoint.GetRoom(room);
             checkedInRoom.IsAvailable = true;
             await _roomEndpoint.UpdateRoom(checkedInRoom);
 
-            checkedIn.IsCheckedOut = true;
-            await _checkInEndpoint.UpdateCheckIn(checkedIn);
+            CheckedIn.IsCheckedOut = true;
+            await _checkInEndpoint.UpdateCheckIn(CheckedIn);
 
             ClearCheckOut();
         }

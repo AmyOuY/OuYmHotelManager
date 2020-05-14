@@ -9,14 +9,15 @@ using System.Web.Http;
 
 namespace OHMDataManager.Controllers
 {
-    [Authorize(Roles = "Receptionist,Manager")]
-    public class CheckOutController : ApiController
+    [Authorize(Roles = "Manager")]
+    public class SaleController : ApiController
     {
-        public void Post(CheckOutModel checkOut)
+        [Route("api/Sale/GetSaleReport")]
+        public List<SaleReportModel> Get()
         {
-            CheckOutData data = new CheckOutData();
+            SaleData data = new SaleData();
 
-            data.SaveCheckOut(checkOut);
+            return data.GetSaleReport();
         }
     }
 }

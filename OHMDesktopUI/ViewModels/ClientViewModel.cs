@@ -254,6 +254,8 @@ namespace OHMDesktopUI.ViewModels
             };
 
             await _clientEndpoint.UpdateClient(client);
+
+            SelectedClient = null;
         }
 
 
@@ -278,6 +280,8 @@ namespace OHMDesktopUI.ViewModels
             await _clientEndpoint.DeleteClient(SelectedClient.Id);
             Clients.Remove(SelectedClient);
             NotifyOfPropertyChange(() => Clients);
+
+            SelectedClient = null;
         }
 
         

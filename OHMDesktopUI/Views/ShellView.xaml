@@ -4,7 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:OHMDesktopUI.Views"
-        mc:Ignorable="d"
+        mc:Ignorable="d" WindowStartupLocation="CenterScreen"
         Title="ShellView" Height="550" Width="800">
     <DockPanel>
         <Menu DockPanel.Dock="Top" FontSize="18">
@@ -14,23 +14,27 @@
             </MenuItem>
 
             <MenuItem Header="_Account" Visibility="{Binding IsLoggedIn, Converter={StaticResource BooleanToVisibilityConverter}, FallbackValue=Collapsed}">
-                <MenuItem x:Name="LogOut" Header="_LogOut" />
+                <MenuItem x:Name="LogOut" Header="_Log Out" />
+            </MenuItem>
+
+            <MenuItem Header="_Users" Visibility="{Binding IsLoggedIn, Converter={StaticResource BooleanToVisibilityConverter}, FallbackValue=Collapsed}">
+                <MenuItem x:Name="UserManagement" Header="_User Management" />
             </MenuItem>
 
             <MenuItem Header="_Rooms" Visibility="{Binding IsLoggedIn, Converter={StaticResource BooleanToVisibilityConverter}, FallbackValue=Collapsed}">
-                <MenuItem x:Name ="Room" Header="Room Management" />
+                <MenuItem x:Name ="Room" Header="_Room Management" />
             </MenuItem>
 
             <MenuItem Header="_Clients" Visibility="{Binding IsLoggedIn, Converter={StaticResource BooleanToVisibilityConverter}, FallbackValue=Collapsed}">
-                <MenuItem x:Name ="Client" Header="Client Management" />
+                <MenuItem x:Name ="Client" Header="_Client Management" />
             </MenuItem>
 
             <MenuItem Header="Check_In" Visibility="{Binding IsLoggedIn, Converter={StaticResource BooleanToVisibilityConverter}, FallbackValue=Collapsed}">
-                <MenuItem x:Name ="CheckIn" Header="CheckIn Management" />
+                <MenuItem x:Name ="CheckIn" Header="Check_In Management" />
             </MenuItem>
 
             <MenuItem Header="Check_Out" Visibility="{Binding IsLoggedIn, Converter={StaticResource BooleanToVisibilityConverter}, FallbackValue=Collapsed}">
-                <MenuItem x:Name ="CheckOut" Header="CheckOut Management" />
+                <MenuItem x:Name ="CheckOut" Header="Check_Out Management" />
             </MenuItem>
             
         </Menu>

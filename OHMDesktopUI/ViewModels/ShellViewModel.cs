@@ -4,6 +4,7 @@ using OHMDesktopUI.Library.Api;
 using OHMDesktopUI.Library.Models;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -80,6 +81,13 @@ namespace OHMDesktopUI.ViewModels
             _apiHelper.LogOffUser();
             ActivateItem(IoC.Get<LoginViewModel>());
             NotifyOfPropertyChange(() => IsLoggedIn);
+        }
+
+
+
+        public void UserManagement()
+        {
+            ActivateItem(IoC.Get<UserDisplayViewModel>());
         }
 
 

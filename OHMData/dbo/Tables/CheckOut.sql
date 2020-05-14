@@ -6,5 +6,6 @@
 	[Tax] MONEY NOT NULL,
 	[Total] MONEY NOT NULL,
     [CreatedDate] DATETIME2 NOT NULL DEFAULT getutcdate(), 
+    CONSTRAINT [FK_CheckOut_ToCheckIn] FOREIGN KEY (CheckInId) REFERENCES CheckIn(Id), 
     
 )
