@@ -85,6 +85,7 @@ namespace OHMDesktopUI.ViewModels
             }
 
             List<CheckInModel> allCheckedIns = await _checkInEndpoint.GetAllCheckIns();
+            allCheckedIns = allCheckedIns.OrderByDescending(x => x.CreatedDate).ToList();
 
             CheckInModel checkedIn = allCheckedIns.Where(x => x.Client == Client).FirstOrDefault();
 

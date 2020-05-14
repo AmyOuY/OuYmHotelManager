@@ -362,6 +362,7 @@ namespace OHMDesktopUI.ViewModels
 
         public void ClearCheckOut()
         {
+            CheckedIn = null;
             ErrorMessage = "";
             Client = "";
             Phone = "";
