@@ -65,7 +65,7 @@ namespace OHMDesktopUI.ViewModels
                 NotifyOfPropertyChange(() => SelectedClient);
                 NotifyOfPropertyChange(() => CanEditClient);
                 NotifyOfPropertyChange(() => CanRemoveClient);
-                NotifyOfPropertyChange(() => CanSwitchToCkeckIn);
+                NotifyOfPropertyChange(() => CanSwitchToCheckIn);
             }
         }
 
@@ -203,7 +203,7 @@ namespace OHMDesktopUI.ViewModels
         }
 
 
-        public bool CanSwitchToCkeckIn
+        public bool CanSwitchToCheckIn
         {
             get
             {
@@ -219,7 +219,7 @@ namespace OHMDesktopUI.ViewModels
         }
 
 
-        public void SwitchToCkeckIn()
+        public void SwitchToCheckIn()
         {
             _events.PublishOnUIThread(new SwitchToLogInEvent($"{ SelectedClient.FirstName } { SelectedClient.LastName }", SelectedClient.Phone));
         }
