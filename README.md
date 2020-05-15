@@ -28,13 +28,8 @@ A desktop app that runs a hotel management system to handle User authentication 
 
 
 
---------Client View displays all client information and allows Add, Edit and Remove client information from the SQL database. Select a client in the data grid and hit the "Switch To Check In" button allows switching to the CheckIn View and automatically filling in available CheckIn information for the selected client--------
+--------Client View displays all client information and allows Add, Edit and Remove client information from the SQL database. Select a client in the data grid and click the "Switch To Check In" button allows switching to the CheckIn View and automatically filling in available CheckIn information for the selected client--------
 <img src="./Images/client.png">
-
-
-
---------Room View displays all room information and allows Add, Edit and Remove room information from the SQL database--------
-<img src="./Images/room.png">
 
 
 
@@ -48,7 +43,7 @@ A desktop app that runs a hotel management system to handle User authentication 
 
 
 
---------CheckOut View allows display of the checkOut information when typing in the room number that needs to check out--------
+--------CheckOut View allows display of the checkOut information when typing in the room number that needs to check out. Clicking the "Check Out" button will store the CheckOut information and update the corresponding CheckIn and Room Availability information in the SQL database--------
 <img src="./Images/checkedOut.png">
 
 
