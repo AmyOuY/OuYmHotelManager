@@ -5,9 +5,11 @@ using OHMDesktopUI.Library.Models;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Dynamic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Controls;
 
 namespace OHMDesktopUI.ViewModels
@@ -16,11 +18,15 @@ namespace OHMDesktopUI.ViewModels
     {
         private readonly IClientEndpoint _clientEndpoint;
         private readonly IEventAggregator _events;
+        private readonly StatusInfoViewModel _status;
+        private readonly IWindowManager _window;
 
-        public ClientViewModel(IClientEndpoint clientEndpoint, IEventAggregator events)
+        public ClientViewModel(IClientEndpoint clientEndpoint, IEventAggregator events, StatusInfoViewModel status, IWindowManager window)
         {
             _clientEndpoint = clientEndpoint;
             _events = events;
+            _status = status;
+            _window = window;
         }
 
 
@@ -28,7 +34,28 @@ namespace OHMDesktopUI.ViewModels
         {
             base.OnViewLoaded(view);
 
-            await LoadClients();
+            try
+            {
+                await LoadClients();
+            }
+            catch (Exception ex)
+            {
+
+                dynamic settings = new ExpandoObject();
+                settings.WindowStartupLocation = WindowStartupLocation.CenterOwner;
+                settings.ResizeMode = ResizeMode.NoResize;
+                settings.Title = "System Error";
+                if (ex.Message == "Unauthorized")
+                {
+                    _status.UpdateMessage("Unauthorized Access", "You don't have permission to interact with the Client form.");
+                    _window.ShowDialog(_status, null, settings);
+                }
+                else
+                {
+                    _status.UpdateMessage("Fatal Exception", ex.Message);
+                    _window.ShowDialog(_status, null, settings);
+                }
+            }
         }
 
 

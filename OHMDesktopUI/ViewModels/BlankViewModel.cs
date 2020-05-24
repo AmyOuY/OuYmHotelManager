@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace OHMDesktopUI.ViewModels
 {
-    public class BlankViewModel
+    class BlankViewModel
     {
     }
 }

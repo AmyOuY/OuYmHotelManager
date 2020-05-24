@@ -42,7 +42,7 @@ namespace OHMDesktopUI.ViewModels
         {
             get { return _client; }
             set
-            {               
+            {   
                 _client = value;
                 NotifyOfPropertyChange(() => Client);
 

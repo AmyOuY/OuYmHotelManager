@@ -17,7 +17,7 @@ namespace OHMDesktopUI.ViewModels
         {
             Header = header;
             Message = message;
-            NotifyOfPropertyChange(() => header);
+            NotifyOfPropertyChange(() => Header);
             NotifyOfPropertyChange(() => Message);
         }
 

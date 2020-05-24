@@ -90,7 +90,6 @@ namespace OHMDesktopUI.ViewModels
                 _selectedUser = value;
                 SelectedUserName = value.Email;
                 UserRoles = new BindingList<string>(value.Roles.Select(x => x.Value).ToList());
-                AvailableRoles = new BindingList<string>();
                 LoadRoles();
                 NotifyOfPropertyChange(() => SelectedUser);
             }
@@ -100,6 +99,8 @@ namespace OHMDesktopUI.ViewModels
         public async Task LoadRoles()
         {
             var roles = await _userEndpoint.GetAllRoles();
+
+            AvailableRoles.Clear();
 
             foreach (var role in roles)
             {

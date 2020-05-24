@@ -13,24 +13,18 @@ namespace OHMDesktopUI.ViewModels
 {
     public class ShellViewModel : Conductor<object>, IHandle<LogOnEvent>, IHandle<SwitchToLogInEvent>
     {
-        private readonly ClientViewModel _clientVM;
-        private readonly RoomViewModel _roomVM;
         private readonly CheckInViewModel _checkInVM;
-        private readonly CheckOutViewModel _checkOutVM;
         private readonly IEventAggregator _events;
-        private readonly BlankViewModel _blankVM;
         private readonly ILoggedInUser _user;
         private readonly IAPIHelper _apiHelper;
 
-        public ShellViewModel(ClientViewModel clientVM, RoomViewModel roomVM, CheckInViewModel checkInVM, CheckOutViewModel checkOutVM,
-            IEventAggregator events, BlankViewModel blankVM, ILoggedInUser user, IAPIHelper apiHelper)
+        public ShellViewModel(CheckInViewModel checkInVM,
+                              IEventAggregator events,
+                              ILoggedInUser user,
+                              IAPIHelper apiHelper)
         {
-            _clientVM = clientVM;
-            _roomVM = roomVM;
             _checkInVM = checkInVM;
-            _checkOutVM = checkOutVM;
             _events = events;
-            _blankVM = blankVM;
             _user = user;
             _apiHelper = apiHelper;
             _events.Subscribe(this);
@@ -40,8 +34,9 @@ namespace OHMDesktopUI.ViewModels
 
         public void Handle(LogOnEvent message)
         {
-            ActivateItem(_blankVM);
+            ActivateItem(IoC.Get<BlankViewModel>());
             NotifyOfPropertyChange(() => IsLoggedIn);
+            NotifyOfPropertyChange(() => IsLoggedOut);
         }
 
 
@@ -69,9 +64,25 @@ namespace OHMDesktopUI.ViewModels
         }
 
 
+        public bool IsLoggedOut
+        {
+            get
+            {
+                return !IsLoggedIn;
+            }
+        }
+
+
         public void ExitApplication()
         {
             TryClose();
+        }
+
+
+        public void LogIn()
+        {
+            ActivateItem(IoC.Get<LoginViewModel>());
+            
         }
 
 
@@ -81,6 +92,7 @@ namespace OHMDesktopUI.ViewModels
             _apiHelper.LogOffUser();
             ActivateItem(IoC.Get<LoginViewModel>());
             NotifyOfPropertyChange(() => IsLoggedIn);
+            NotifyOfPropertyChange(() => IsLoggedOut);
         }
 
 
@@ -93,25 +105,25 @@ namespace OHMDesktopUI.ViewModels
 
         public void Room()
         {
-            ActivateItem(_roomVM);
+            ActivateItem(IoC.Get<RoomViewModel>());
         }
 
 
         public void Client()
         {
-            ActivateItem(_clientVM);
+            ActivateItem(IoC.Get<ClientViewModel>());
         }
 
 
         public void CheckIn()
         {
-            ActivateItem(_checkInVM);
+            ActivateItem(IoC.Get<CheckInViewModel>());
         }
 
 
         public void CheckOut()
         {
-            ActivateItem(_checkOutVM);
+            ActivateItem(IoC.Get<CheckOutViewModel>());
         }
     }
 }
