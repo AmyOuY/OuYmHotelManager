@@ -9,12 +9,12 @@ A desktop app that runs a hotel management system to handle User authentication 
 
 
 --------Successful login allows the display of app menus on top of the shell window--------
-<img src="./Images/login.png">
+<img src="./Images/Login.png">
 
 
 
 --------Only User with Admin role is allowed to manage the User information--------
-<img src="./Images/user.png">
+<img src="./Images/User.png">
 
 
 
