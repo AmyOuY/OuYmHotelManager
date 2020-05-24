@@ -150,6 +150,7 @@ namespace OHMDesktopUI.ViewModels
             {
                 _selectedUserRole = value;
                 NotifyOfPropertyChange(() => SelectedUserRole);
+                NotifyOfPropertyChange(() => CanRemoveSelectedRole);
             }
         }
 
@@ -177,6 +178,40 @@ namespace OHMDesktopUI.ViewModels
             {
                 _selectedAvailableRole = value;
                 NotifyOfPropertyChange(() => SelectedAvailableRole);
+                NotifyOfPropertyChange(() => CanAddSelectedRole);
+            }
+        }
+
+
+        public bool CanAddSelectedRole
+        {
+            get
+            {
+                if (SelectedUser == null || SelectedAvailableRole == null)
+                {
+                    return false;
+                }
+                else
+                {
+                    return true;
+                }
+            }
+        }
+
+
+
+        public bool CanRemoveSelectedRole
+        {
+            get
+            {
+                if (SelectedUser == null || SelectedUserRole == null)
+                {
+                    return false;
+                }
+                else
+                {
+                    return true;
+                }
             }
         }
 

@@ -45,6 +45,7 @@ namespace OHMDesktopUI.ViewModels
                 settings.WindowStartupLocation = WindowStartupLocation.CenterOwner;
                 settings.ResizeMode = ResizeMode.NoResize;
                 settings.Title = "System Error";
+
                 if (ex.Message == "Unauthorized")
                 {
                     _status.UpdateMessage("Unauthorized Access", "You don't have permission to interact with the Client form.");
@@ -55,6 +56,8 @@ namespace OHMDesktopUI.ViewModels
                     _status.UpdateMessage("Fatal Exception", ex.Message);
                     _window.ShowDialog(_status, null, settings);
                 }
+
+                TryClose();
             }
         }
 
