@@ -52,7 +52,7 @@
 
 
 <h3></h3>
-<h3>Select one room type from the Type drop-down will display the available rooms of the chosen type in the Number drop-down</h3>
+<h3>Select one room type from the Type drop-down will display the available rooms of the chosen type in the Number drop-down. When a room number is chosen, the corresponding room capacity and price info will be automatically filled in.</h3>
 <hr>
 <img src="./Images/checkIn.png">
 
