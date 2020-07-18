@@ -5,7 +5,7 @@
   <li> A middle Web API layer that services the desktop application was created to expand the utility of the app. </li>
   <li> Front-end was implemented with Windows Presentation Foundation (<strong>WPF</strong>) using Caliburn Micro's MVVM pattern and Dependency Injection container. </li>
   <li> The middle API layer was implemented using ASP.NET MVC and Web API, Swagger with Authentication and Authorization, and Async/Await. </li>
-  <li> Back-end was implemented with Microsoft SQL Server Data Tools (<strong>SSDT</strong>). </li> 
+  <li> Back-end data access and storage was implemented with Microsoft SQL Server Data Tools (<strong>SSDT</strong>). </li> 
 </ul>
 
 
