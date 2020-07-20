@@ -1,4 +1,4 @@
-# Hotel Management System (.NET Framework)
+# Hotel Management System (C# .NET Framework)
 
 <ul>
   <li> A desktop application that allows users to manage Hotel Rooms, Clients, Checkins, Checkouts and Sales Reports with User Authentication and Permission. </li>
