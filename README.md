@@ -1,10 +1,10 @@
 # Hotel Management System (C# .NET Framework)
 
 <ul>
-  <li> A desktop application that allows users to manage Hotel Rooms, Clients, Check-ins, Checkouts and Sales Reports with User Authentication and Permission. </li>
+  <li> A desktop application that allows users to manage User Roles, Hotel Rooms, Clients, Check-ins, Checkouts and Sales Reports with User Authentication and Permission. </li>
   <li> A middle Web API layer that services the desktop application was created to expand the utility of the app. </li>
   <li> Front-end was implemented with Windows Presentation Foundation (<strong>WPF</strong>) using Caliburn Micro's MVVM pattern and Dependency Injection container. </li>
-  <li> The middle API layer was implemented using ASP.NET MVC and Web API, Swagger with Authentication and Authorization, and Async/Await. </li>
+  <li> The middle API layer was implemented using ASP.NET MVC and Web API, Authentication and Authorization with Swagger documentation, and Async/Await. </li>
   <li> Back-end data storage and retrieval was implemented with Microsoft SQL Server Data Tools (<strong>SSDT</strong>). </li> 
 </ul>
 
