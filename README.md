@@ -1,16 +1,16 @@
 # Hotel Management System (C# .NET Framework)
 
 <ul>
-  <li> A desktop application that allows users to manage User Roles, Hotel Rooms, Clients, Check-ins, Checkouts and Check in/out Reports with User Authentication and Permission. </li>
+  <li> A desktop application that allows users to manage User Roles, Hotel Rooms, Clients, Check-ins, Checkouts and Check in/out Reports with Authentication and Permission. </li>
   <li> A middle Web API layer that services the desktop application was created to expand the utility of the app. </li>
   <li> Front-end was implemented with Windows Presentation Foundation (<strong>WPF</strong>) using Caliburn Micro's MVVM pattern and Dependency Injection container. </li>
-  <li> The middle API layer was implemented using ASP.NET MVC and Web API, Authentication and Authorization with Swagger documentation, and Async/Await. </li>
+  <li> The middle Web API layer was implemented using ASP.NET MVC and Web API, Authentication and Authorization with Swagger documentation, and Async/Await. </li>
   <li> Back-end data storage and retrieval was implemented with Microsoft SQL Server Data Tools (<strong>SSDT</strong>). </li> 
 </ul>
 
 
 <h3></h3>
-<h3> Swagger was used to document and demonstrate the Web API</h3>
+<h3> Swagger was used to document the Web API Endpoints</h3>
 <hr>
 <img src="./Images/WebAPI.png">
 
@@ -22,13 +22,13 @@
 
 
 <h3></h3>
-<h3>Only User with Admin role is allowed to manage the User information</h3>
+<h3>Only User with Admin role is allowed to manage the User Roles</h3>
 <hr>
 <img src="./Images/User.png">
 
 
 <h3></h3>
-<h3>Unauthorized User is banned from manipulating the User information</h3>
+<h3>Unauthorized User is banned from manipulating the User Roles</h3>
 <hr>
 <img src="./Images/unauthorizedUser.png">
 
@@ -52,7 +52,7 @@
 
 
 <h3></h3>
-<h3>Select one room type from the Type drop-down will display the available rooms of the chosen type in the Number drop-down. When a room number is chosen, the corresponding room capacity and price info will be automatically filled in.</h3>
+<h3>Select one room type from the Type drop-down will display the available rooms of the chosen type in the Number drop-down. When a room number is chosen, the corresponding room capacity and price info will be automatically filled.</h3>
 <hr>
 <img src="./Images/checkIn.png">
 
@@ -70,6 +70,6 @@
 
 
 <h3></h3>
-<h3>Only authorized user can access the Sales Reports</h3>
+<h3>Only authorized user can access the Check in/out Reports</h3>
 <hr>
 <img src="./Images/saleReport.png">
