@@ -34,13 +34,13 @@
 
 
 <h3></h3>
-<h3>Room View displays all room information and allows Add, Edit and Remove room information from the SQL database</h3>
+<h3>Room View displays all room information and allows Add, Edit and Remove room information from the table and SQL database</h3>
 <hr>
 <img src="./Images/room.png">
 
 
 <h3></h3>
-<h3>Client View displays all client information and allows Add, Edit and Remove client information from the SQL database. Select a client in the data grid and click the "Switch To Check In" button allows switching to the CheckIn View and automatically filling in available CheckIn information for the selected client</h3>
+<h3>Client View displays all client information and allows Add, Edit and Remove client information from the table and SQL database. Select a client in the table and click the "Switch To Check In" button allows switching to the CheckIn View and automatically filling in available CheckIn information for the selected client</h3>
 <hr>
 <img src="./Images/client.png">
 
